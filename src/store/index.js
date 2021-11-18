@@ -7,19 +7,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    movies: []
+    movies: null
   },
+
   mutations: {
     GET_MOVIES: function (state, data) {
-      state.movies = data
+      state.movies = data.data
+      
     }
   },
+
   actions: {
     getMovies: function({commit}) {
       const Django_URL = 'http://127.0.0.1:8000'
+
       axios.get(`${Django_URL}/movies`)
         .then((res) => {
-          commit('GET_MOVIES', res.data)
+          commit('GET_MOVIES', res)
         })
         .catch((err) => {
           console.log(err)
