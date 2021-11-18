@@ -7,6 +7,7 @@ import ReviewForm from '../views/reviews/ReviewForm.vue'
 import Recommendation from '../views/recommendation/Recommendation.vue'
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
+import Profile from '../views/accounts/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
 ]
 
