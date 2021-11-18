@@ -1,12 +1,18 @@
 <template>
   <div>
-    <h3>movie item</h3>
+    <li>
+      {{movie.title}}
+    </li>    
   </div>
 </template>
 
 <script>
 export default {
-  name:'MovieItem'
+  name:'MovieItem',
+  props:{
+    movie: Object,
+  },
+  methods: {},
 }
 </script>
 

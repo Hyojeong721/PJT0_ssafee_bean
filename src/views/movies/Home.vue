@@ -6,6 +6,9 @@
   </div>
 </template>
 
+const API_URL = 'http://127.0.0.1:8000'
+
+
 <script>
 import MovieList from './MovieList.vue'
 
@@ -18,6 +21,9 @@ export default {
     },
     components:{
         MovieList,
+    },
+    created: function () {
+        this.$store.dispatch('getMovies')
     }
 
 
