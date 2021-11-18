@@ -20,7 +20,11 @@ export default {
         movies: function () {
             return this.$store.state.movies
         }
-    }
+    },
+    
+    created: function () {
+        this.$store.dispatch('getMovies')
+  },
     
 }
 </script>
