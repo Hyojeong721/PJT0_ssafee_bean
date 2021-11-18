@@ -26,6 +26,7 @@ export default {
       isLogin: false,
     }
   },
+
   methods: {
     logout: function () {
       this.isLogin = false
@@ -33,13 +34,15 @@ export default {
       this.$router.push({ name: 'Home' })
     }
   },
-  created: function () {
-    const token = localStorage.getItem('jwt')
+    created: function () {
+      const token = localStorage.getItem('jwt')
 
-    if (token) {
-      this.isLogin = true
-    }
-  }
+      if (token) {
+        this.isLogin = true
+      }
+      this.$store.dispatch('getMovies')
+    },
+
 }
 </script>
 

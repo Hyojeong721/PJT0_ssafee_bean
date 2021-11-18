@@ -4,6 +4,7 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+
 export default new Vuex.Store({
   state: {
     movies: []
@@ -18,13 +19,14 @@ export default new Vuex.Store({
       const Django_URL = 'http://127.0.0.1:8000'
       axios.get(`${Django_URL}/movies`)
         .then((res) => {
-          console.log(res.data)
           commit('GET_MOVIES', res.data)
         })
         .catch((err) => {
           console.log(err)
         }) 
-    }
+    },
+
+    
   },
   modules: {
   }
