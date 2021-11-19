@@ -37,10 +37,10 @@ export default {
   },
   created: function () {
     const username = this.$store.state.loginUser
-
+    const Django_URL = 'http://127.0.0.1:8000'
     axios({
       method: 'get',
-      url: `http://127.0.0.1:8000/accounts/${username}/`,
+      url: `${Django_URL}/accounts/${username}/`,
       headers: this.setToken()
     })
       .then(res => {
