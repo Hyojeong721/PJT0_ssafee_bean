@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
         <router-link to="/">홈</router-link> |
-        <router-link to='/moviews'>영화</router-link> |
+        <router-link to='/movies'>영화</router-link> |
         <router-link to='/recommendation'>추천</router-link> |
         <router-link to="/reviews">리뷰</router-link> |
       <span v-if="isLogin">

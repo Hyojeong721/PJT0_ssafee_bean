@@ -12,7 +12,11 @@ import Recommendation from '../views/recommendation/Recommendation.vue'
 
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
+
+import MovieDetail from '../views/movies/MovieDetail.vue'
+
 import Profile from '../views/accounts/Profile.vue'
+
 
 Vue.use(VueRouter)
 
@@ -26,6 +30,12 @@ const routes = [
     path: '/movies',
     name: 'MovieList',
     component: MovieList
+  },
+  { 
+    path: '/movies/:movie_id',
+    name: 'MovieDetail',
+    component: MovieDetail
+
   },
   {
     path: '/recommendation',

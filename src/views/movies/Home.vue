@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
       <h1>Home</h1>
       <now-movie-list
       v-for="movie in movies"
@@ -39,7 +39,6 @@ export default {
       })
         .then ((res) => {
           this.movies = res.data.results
-          console.log(this.movies)
         })
         .catch((err) => {
           console.log(err)

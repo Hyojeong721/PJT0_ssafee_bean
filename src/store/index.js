@@ -7,15 +7,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    movies: [],
+    movies: null
     loginUser: '',
     selectedReview: [],
     userInfo: {},
   },
+
   mutations: {
     GET_MOVIES: function (state, data) {
-      state.movies = data
-    },
+      state.movies = data.data 
+    }
     LOGIN_USER: function (state, credentials) {
       state.loginUser = credentials.username
     },
@@ -26,12 +27,14 @@ export default new Vuex.Store({
       state.userInfo = userInfo
     },
   },
+
   actions: {
     getMovies: function ({ commit }) {
       const Django_URL = 'http://127.0.0.1:8000'
+
       axios.get(`${Django_URL}/movies`)
         .then((res) => {
-          commit('GET_MOVIES', res.data)
+          commit('GET_MOVIES', res)
         })
         .catch((err) => {
           console.log(err)
