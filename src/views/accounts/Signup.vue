@@ -49,15 +49,19 @@ export default {
         username: null,
         password: null,
         passwordConfirmation: null,
-        // avatarThumbnail: null,
+        avatarThumbnail: null,
+        // mbti: null,
+        // mileage: null,
+        // pay: false,
       }
     }
   },
   methods: {
     signup: function () {
+      const Django_URL = 'http://127.0.0.1:8000'
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/accounts/signup/',
+        url: `${Django_URL}/accounts/signup/`,
         data: this.credentials
       })
         .then(() => {

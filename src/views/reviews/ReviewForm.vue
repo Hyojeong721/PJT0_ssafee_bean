@@ -26,8 +26,8 @@ export default {
       const review = {
         title: this.title,
         content: this.content,
-        user: 1, // 현재 로그인한 유저의 id 입력
-        movie: 3, // 영화 리스트 중 선택하게끔 변경해야 함
+        //user: 1, // 현재 로그인한 유저의 id 입력
+        //movie: , // 영화 리스트 중 선택하게끔 변경해야 함
       }
       if (review.title) {
         axios({
