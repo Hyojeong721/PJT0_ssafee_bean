@@ -26,6 +26,14 @@
         @keyup.enter="signup"
       >
     </div>
+    <!-- <div>
+      <label for="avatarThumbnail">사진 등록: </label>
+      <input 
+        type="file"
+        id="avatarThumbnail"
+        v-model="credentials.avatarThumbnail"
+      >
+    </div> -->
     <button @click="signup">회원가입</button>
   </div>
 </template>
@@ -41,6 +49,7 @@ export default {
         username: null,
         password: null,
         passwordConfirmation: null,
+        // avatarThumbnail: null,
       }
     }
   },

@@ -6,6 +6,7 @@
         <router-link to='/recommendation'>추천</router-link> |
         <router-link to="/reviews">리뷰</router-link> |
       <span v-if="isLogin">
+        <router-link to='/profile'>프로필</router-link> |
         <router-link @click.native="logout" to="#">로그아웃</router-link>
       </span>
       <span v-else>
@@ -26,7 +27,6 @@ export default {
       isLogin: false,
     }
   },
-
   methods: {
     logout: function () {
       this.isLogin = false
@@ -34,15 +34,14 @@ export default {
       this.$router.push({ name: 'Home' })
     }
   },
-    created: function () {
-      const token = localStorage.getItem('jwt')
+  created: function () {
+    const token = localStorage.getItem('jwt')
 
-      if (token) {
-        this.isLogin = true
-      }
-      this.$store.dispatch('getMovies')
-    },
-
+    if (token) {
+      this.isLogin = true
+    }
+    this.$store.dispatch('getMovies')
+  },
 }
 </script>
 
