@@ -47,13 +47,15 @@ export default {
   components: {
     MovieItem,
   },
-
+  data: function () {
+    return {
+      movies: null,
+    }
+  },
   computed: {
     movies: function () {
       return this.$store.state.movies
     },
-  },
-
   methods: {
     onGenre: function (res) {
       const genres = res.target.value
@@ -63,6 +65,16 @@ export default {
 
   created: function () {
     this.$store.dispatch("getMovies")
+      const genre = Number(res.target.value)
+      const movies = this.$store.state.movies
+      const genreMovie = movies.filter((movie) =>  {
+        const genres = movie.genres
+        if (genres.includes(genre)) {
+          return movie
+        }
+      })
+      this.movies = genreMovie
+    }
   },
 }
 </script>
