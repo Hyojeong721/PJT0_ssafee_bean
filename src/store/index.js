@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    movies: null
+    movies: null,
     loginUser: '',
     selectedReview: [],
     userInfo: {},
@@ -16,7 +16,7 @@ export default new Vuex.Store({
   mutations: {
     GET_MOVIES: function (state, data) {
       state.movies = data.data 
-    }
+    },
     LOGIN_USER: function (state, credentials) {
       state.loginUser = credentials.username
     },

@@ -23,9 +23,9 @@ export default {
         return `https://image.tmdb.org/t/p/original/${movieImage}`
         }
     },
-
+    
     created: function () {
-        const now_movie = this.$route.params.now_movie
+        // const now_movie = this.$route.params.now_movie
         const movie_id = this.$route.params.movie_id
         const movies = this.$store.state.movies
         if (movie_id) {
@@ -35,11 +35,7 @@ export default {
                 }
             })
             this.movie = selectedmovie[0]
-        } else {
-            console.log(now_movie)
-            this.movie = now_movie
         }
-
     }
   
 }

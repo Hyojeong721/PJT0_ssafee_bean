@@ -9,6 +9,8 @@ import ReviewForm from '../views/reviews/ReviewForm.vue'
 import ReviewDetail from '../views/reviews/ReviewDetail.vue'
 
 import Recommendation from '../views/recommendation/Recommendation.vue'
+import GenreReco from '../views/recommendation/GenreReco.vue'
+import GenreRecoDetail from '../views/recommendation/GenreRecoDetail.vue'
 
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
@@ -35,12 +37,21 @@ const routes = [
     path: '/movies/:movie_id',
     name: 'MovieDetail',
     component: MovieDetail
-
   },
   {
     path: '/recommendation',
     name: 'Recommendation',
     component: Recommendation
+  },
+  {
+    path: '/recommendation/genre/home/',
+    name: 'GenreReco',
+    component: GenreReco
+  },
+  { 
+    path: '/recommendation/genre/:genre_id/',
+    name: 'GenreRecoDetail',
+    component: GenreRecoDetail
   },
   {
     path: '/reviews',
