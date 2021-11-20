@@ -6,6 +6,7 @@
         <router-link to='/recommendation'>추천</router-link> |
         <router-link to="/reviews">리뷰</router-link> |
       <span v-if="isLogin">
+        <router-link to='/profile/likes'>찜</router-link> |
         <router-link to='/profile'>프로필</router-link> |
         <router-link @click.native="logout" to="#">로그아웃</router-link>
       </span>
