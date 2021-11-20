@@ -3,7 +3,7 @@
     <div class="card-body offset-md-3 col-6">
       <h2>{{ movie.title }}</h2>
       <vue-star-rate
-        :rateRange="0"
+        :rateRange="rankData.user_rank"
         :maxIcon="5"
         :iconHeight="22"
         :iconWidth="22"
@@ -13,19 +13,17 @@
       ></vue-star-rate>
       <i
         v-if="liked"
-        id="heart-btn"
         class="fas fa-heart"
         style="color: red"
         @click="updateLikes"
       ></i>
       <i
         v-else
-        id="heart-btn"
         class="far fa-heart"
         style="color: black"
         @click="updateLikes"
       ></i>
-      <span id="like-count">{{ likeCount }}</span>명이 좋아합니다.
+      <span>{{ likeCount }}</span>명이 좋아합니다.
       <img :src="imageURL" alt="movie image" class="card-img-top" />
       <p class="card-text">{{ movie.story }}</p>
     </div>
@@ -123,6 +121,7 @@ export default {
     }
     const Django_URL = 'http://127.0.0.1:8000'
     const token = localStorage.getItem("jwt")
+    // 좋아요 GET
     axios({
       method: "get",
       url: `${Django_URL}/movies/${this.movie.id}/likes/`,
@@ -138,15 +137,17 @@ export default {
       .catch((err) => {
         console.log(err)
       })
+    // 평점 GET
     axios({
       method: 'get',
       url: `${Django_URL}/movies/${this.movie.id}/rank/`,
       headers: {
-        Authorization: `'JWT ${token}`,
+        Authorization: `JWT ${token}`,
       },
     })
       .then(res => {
-        console.log(res)
+        this.rankData.user_rank = res.data.user_rank
+        console.log(this.rankData.user_rank)
       })
       .catch(err => {
         console.log(err)

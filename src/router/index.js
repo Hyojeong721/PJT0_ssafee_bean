@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/movies/Home.vue'
 import MovieList from '../views/movies/MovieList.vue'
+import LikeMovieList from '../views/movies/LikeMovieList.vue'
+import MovieDetail from '../views/movies/MovieDetail.vue'
 
 import ReviewList from '../views/reviews/ReviewList.vue'
 import ReviewForm from '../views/reviews/ReviewForm.vue'
@@ -14,9 +16,6 @@ import GenreRecoDetail from '../views/recommendation/GenreRecoDetail.vue'
 
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
-
-import MovieDetail from '../views/movies/MovieDetail.vue'
-
 import Profile from '../views/accounts/Profile.vue'
 
 
@@ -37,6 +36,11 @@ const routes = [
     path: '/movies/:movie_id',
     name: 'MovieDetail',
     component: MovieDetail
+  },
+  {
+    path: '/profile/likes',
+    name: 'LikeMovieList',
+    component: LikeMovieList
   },
   {
     path: '/recommendation',
