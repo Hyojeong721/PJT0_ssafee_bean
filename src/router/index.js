@@ -13,6 +13,7 @@ import ReviewDetail from '../views/reviews/ReviewDetail.vue'
 import Recommendation from '../views/recommendation/Recommendation.vue'
 import GenreReco from '../views/recommendation/GenreReco.vue'
 import GenreRecoDetail from '../views/recommendation/GenreRecoDetail.vue'
+import RankReco from '../views/recommendation/RankReco.vue'
 
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
@@ -48,7 +49,7 @@ const routes = [
     component: Recommendation
   },
   {
-    path: '/recommendation/genre/home/',
+    path: '/recommendation/genre',
     name: 'GenreReco',
     component: GenreReco
   },
@@ -56,6 +57,11 @@ const routes = [
     path: '/recommendation/genre/:genre_id/',
     name: 'GenreRecoDetail',
     component: GenreRecoDetail
+  },
+  {
+    path: '/recommendation/rank',
+    name: 'RankReco',
+    component: RankReco
   },
   {
     path: '/reviews',

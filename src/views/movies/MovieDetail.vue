@@ -47,7 +47,7 @@ export default {
       likeCount: 0,
       rankData: {
         user_rank: 0,
-        user: 0,
+        user: this.$store.state.userInfo.id,
         movie: 0,
       },
     };
@@ -126,7 +126,7 @@ export default {
       method: "get",
       url: `${Django_URL}/movies/${this.movie.id}/likes/`,
       headers: {
-        Authorization: `JWT ${token}`,
+        Authorization: `JWT ${token}`
       },
     })
       .then((res) => {
@@ -142,7 +142,7 @@ export default {
       method: 'get',
       url: `${Django_URL}/movies/${this.movie.id}/rank/`,
       headers: {
-        Authorization: `JWT ${token}`,
+        Authorization: `JWT ${token}`
       },
     })
       .then(res => {
