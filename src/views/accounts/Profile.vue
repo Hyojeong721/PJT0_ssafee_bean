@@ -1,17 +1,39 @@
 <template>
-  <div>
+  <div class="container">
     <h1>프로필</h1>
     <div>
       <img :src="`http://127.0.0.1:8000${user.avatar_thumbnail}`" alt="">
+      <input type="file" accept="image/*" @change="fileSrc">
     </div>
     <div>
-      <h2>{{ user.username }}</h2>
-      <h4>{{ user.mbti }}</h4>
-      <p>{{ user.mileage }}</p>
-      <p>카카오페이 연동여부: {{ kakao }}</p>
+      <h2>사용자: {{ user.username }}</h2>
+      <hr>
+      <h4>MBTI</h4>
+      <select name="selectMBTI" v-model="user.mbti">
+        <option>없음</option>
+        <option>ISTJ</option>
+        <option>ISTP</option>
+        <option>ISFJ</option>
+        <option>ISFP</option>
+        <option>INTJ</option>
+        <option>INTP</option>
+        <option>INFJ</option>
+        <option>INFP</option>
+        <option>ESTJ</option>
+        <option>ESTP</option>
+        <option>ESFJ</option>
+        <option>ESFP</option>
+        <option>ENTJ</option>
+        <option>ENTP</option>
+        <option>ENFJ</option>
+        <option>ENFP</option>
+      </select>
+      <hr>
+      <p>마일리지: {{ user.mileage }}</p>
+      <p>카카오페이 연동: {{ kakao }}</p>
     </div>
     <div>
-      <button>프로필 수정</button>
+      <button @click="profileUpdate">프로필 수정</button>
     </div>
   </div>
 </template>
@@ -24,6 +46,7 @@ export default {
   data: function () {
     return {
       user: {},
+      file: '',
     }
   },
   methods: {
@@ -34,23 +57,61 @@ export default {
       }
       return config
     },
+    fileSrc: function (event) {
+      this.file = event.target.files[0]
+      console.log(this.file)
+    },
+    getUser: function () {
+      const username = this.$store.state.loginUser
+      const Django_URL = 'http://127.0.0.1:8000'
+      axios({
+        method: 'get',
+        url: `${Django_URL}/accounts/${username}/`,
+        headers: this.setToken()
+      })
+        .then(res => {
+          this.user = res.data
+          if (this.user.mbti == 'NULL') {
+            this.user.mbti = '없음'
+          }
+          this.$store.dispatch('userInfo', this.user)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    profileUpdate: function() {
+      const username = this.$store.state.loginUser
+      var formData = new FormData()
+      if (this.file) {
+        formData.append('avatar_thumbnail', this.file)
+      } else {
+        formData.append('avatar_thumbnail', this.user.avatar_thumbnail)
+      }
+      formData.append("mbti", this.user.mbti)
+      formData.append("mileage", this.user.mileage)
+      formData.append("pay", this.user.pay)
+      const Django_URL = 'http://127.0.0.1:8000'
+      axios({
+        method: 'put',
+        url: `${Django_URL}/accounts/${username}/`,
+        data: formData,
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('jwt')}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(res => {
+          console.log(res)
+          this.$router.go()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   },
   created: function () {
-    const username = this.$store.state.loginUser
-    const Django_URL = 'http://127.0.0.1:8000'
-    axios({
-      method: 'get',
-      url: `${Django_URL}/accounts/${username}/`,
-      headers: this.setToken()
-    })
-      .then(res => {
-        console.log(res)
-        this.user = res.data
-        this.$store.dispatch('userInfo', this.user)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.getUser()
   },
   computed: {
     kakao: function () {

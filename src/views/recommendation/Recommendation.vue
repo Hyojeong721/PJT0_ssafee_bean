@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/recommendation/genre">장르별 추천</router-link> |
       <router-link to="/recommendation/rank">평점별 추천</router-link> |
-      <router-link to="">MBTI 추천</router-link>
+      <router-link to="/recommendation/mbti">MBTI 추천</router-link>
     
     </div>
       <div class="mt-3">
