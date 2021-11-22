@@ -1,15 +1,13 @@
 <template>
-  <div name="nowMovie" class="col-2">
-    <div class="card">
-      <!-- 카드 누를때 디테일창으로 넘어가는 부분 -->
-      <router-link :to="`/movies/${movie.id}`" style="color: black; text-decoration: none;">
-        <div>
-          <img class="card-img-top" :src="imageURL" alt="movieImage">    
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <p>{{ movie.genres }}</p>
-        </div>
-      </router-link>
+  <div  name="nowMovie" >
+    <div class="carousel-item active">
+      <img class="d-block w-100" style="object-fit: cover" :src="imageURL" alt="movieImage">
+
     </div>
+    <!-- <router-link :to="`/movies/${movie.id}`" style="color: black; text-decoration: none;"> -->
+      
+   
+    <!-- </router-link> -->
   </div>
 </template>
 
@@ -39,4 +37,5 @@ export default {
 </script>
 
 <style>
+
 </style>
