@@ -2,15 +2,45 @@
   <div class="card row">
     <div class="card-body offset-md-3 col-6">
       <h2>{{ movie.title }}</h2>
-      <vue-star-rate
-        :rateRange="rankData.user_rank"
-        :maxIcon="5"
-        :iconHeight="22"
-        :iconWidth="22"
-        :hasCounter="true"
-        iconShape="star"
-        @ratingSet="myRating"
-      ></vue-star-rate>
+      <div>
+        <vue-star-rate
+          :rateRange="rankData.user_rank"
+          :maxIcon="5"
+          :iconHeight="22"
+          :iconWidth="22"
+          :hasCounter="true"
+          iconShape="star"
+          @ratingSet="myRating"
+        ></vue-star-rate>
+        <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
+        <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">평점</h3>
+                <vue-star-rate
+                  :rateRange="0"
+                  :maxIcon="5"
+                  :iconHeight="22"
+                  :iconWidth="22"
+                  :hasCounter="true"
+                  iconShape="star"
+                  @ratingSet="myRatingUpdate"
+                ></vue-star-rate>
+              </div>
+              <!-- <div class="modal-body">
+                <h5>내용</h5>
+                <input type="text" v-model="review[0].content">
+              </div> -->
+              <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-primary">저장</button> -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
+      </div>
       <i
         v-if="liked"
         class="fas fa-heart"
@@ -46,13 +76,17 @@ export default {
       liked: false,
       likeCount: 0,
       rankData: {
-        user_rank: 0,
+        user_rank: this.$store.state.userRank,
         user: this.$store.state.userInfo.id,
         movie: 0,
       },
+      rankID: 0,
     };
   },
   methods: {
+    reload: function () {
+      this.$router.go()
+    },
     setToken: function () {
       const token = localStorage.getItem("jwt")
       const config = {
@@ -87,20 +121,99 @@ export default {
       })
         .then(res => {
           console.log(res)
+          this.$router.go()
         })
         .catch(err => {
           console.log(err)
         })
     },
+    myRatingUpdate: function (rating) {
+      this.rankData.user_rank = rating
+      const Django_URL = 'http://127.0.0.1:8000'
+      axios({
+        method: 'put',
+        url: `${Django_URL}/movies/${this.movie.id}/rank/${this.rankID}/`,
+        data: this.rankData,
+        headers: this.setToken()
+      })
+        .then(res => {
+          console.log(res)
+          alert(res.data.message)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    myRatingDelete: function () {
+      const Django_URL = 'http://127.0.0.1:8000'
+      axios({
+        method: 'delete',
+        url: `${Django_URL}/movies/${this.movie.id}/rank/${this.rankID}/`,
+        headers: this.setToken()
+      })
+        .then(res => {
+          console.log(res)
+          this.$router.go()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getUserLikes: function () {
+      const Django_URL = 'http://127.0.0.1:8000'
+      const token = localStorage.getItem("jwt")
+      // 좋아요 GET
+      axios({
+        method: "get",
+        url: `${Django_URL}/movies/${this.movie.id}/likes/`,
+        headers: {
+          Authorization: `JWT ${token}`
+        },
+      })
+        .then((res) => {
+          const { liked, likeCount } = res.data
+          this.liked = liked
+          this.likeCount = likeCount
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getUserRank: function () {
+      const Django_URL = 'http://127.0.0.1:8000'
+      const token = localStorage.getItem("jwt")
+      // 평점 GET
+      axios({
+        method: 'get',
+        url: `${Django_URL}/movies/${this.movie.id}/rank/`,
+        headers: {
+          Authorization: `JWT ${token}`
+        },
+      })
+        .then(res => {
+          this.rankID = res.data.id
+          const userRank = res.data.user_rank
+          this.rankData.user_rank = userRank
+          this.$store.dispatch('userRank', userRank)
+        })
+        .catch(err => {
+          console.log(err)
+          const userRank = null
+          this.rankData.user_rank = userRank
+          this.$store.dispatch('userRank', userRank)
+        })
+        .finally(() => {
+          // 새로고침
+          // this.$router.go()
+        })
+    },
   },
-
   computed: {
     imageURL: function () {
       const movieImage = this.movie.poster_path
       return `https://image.tmdb.org/t/p/original/${movieImage}`
     },
   },
-
   created: function () {
     const now_movie = this.$route.params.now_movie
     const movie_id = this.$route.params.movie_id
@@ -112,46 +225,15 @@ export default {
         }
       })
       this.movie = selectedmovie[0]
-      console.log(this.movie)
+      
       this.rankData.movie = selectedmovie[0].id
       this.rankData.user = this.$store.state.userInfo.id
     } else {
-      console.log(now_movie)
+      
       this.movie = now_movie
     }
-    const Django_URL = 'http://127.0.0.1:8000'
-    const token = localStorage.getItem("jwt")
-    // 좋아요 GET
-    axios({
-      method: "get",
-      url: `${Django_URL}/movies/${this.movie.id}/likes/`,
-      headers: {
-        Authorization: `JWT ${token}`
-      },
-    })
-      .then((res) => {
-        const { liked, likeCount } = res.data
-        this.liked = liked
-        this.likeCount = likeCount
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    // 평점 GET
-    axios({
-      method: 'get',
-      url: `${Django_URL}/movies/${this.movie.id}/rank/`,
-      headers: {
-        Authorization: `JWT ${token}`
-      },
-    })
-      .then(res => {
-        this.rankData.user_rank = res.data.user_rank
-        console.log(this.rankData.user_rank)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.getUserLikes()
+    this.getUserRank()
   },
 }
 </script>
