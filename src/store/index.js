@@ -14,6 +14,7 @@ export default new Vuex.Store({
     loginUser: '',
     selectedReview: [],
     userInfo: {},
+    userRank: 0,
   },
 
   mutations: {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     USER_INFO: function (state, userInfo) {
       state.userInfo = userInfo
+    },
+    USER_RANK: function(state, userRank) {
+      state.userRank = userRank
     },
   },
 
@@ -51,6 +55,9 @@ export default new Vuex.Store({
     },
     userInfo: function ({ commit }, userInfo) {
       commit('USER_INFO', userInfo)
+    },
+    userRank: function ({ commit }, userRank) {
+      commit('USER_RANK', userRank)
     },
   },
   modules: {

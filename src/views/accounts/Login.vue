@@ -15,11 +15,14 @@
       />
     </div>
     <button @click="login">로그인</button>
+    <!-- <GoogleLogin class="big-button" :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin> -->
+    <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">Login</GoogleLogin>
   </div>
 </template>
 
 <script>
 import axios from "axios"
+import GoogleLogin from 'vue-google-login'
 
 export default {
   name: "Login",
@@ -29,7 +32,18 @@ export default {
         username: null,
         password: null,
       },
+      params: {
+        client_id: '527977877033-nkv5b2vo72bgsk6hdsg4f1tl9fq1s0of.apps.googleusercontent.com'
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
+      }
     }
+  },
+  components: {
+    GoogleLogin
   },
   methods: {
     login: function () {
@@ -54,6 +68,9 @@ export default {
           console.log(err)
         })
     },
+    onSuccess(googleUser) {
+      console.log(googleUser.getBasicProfile())
+    }
   },
 }
 </script>
