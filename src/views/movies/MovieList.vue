@@ -63,6 +63,9 @@ export default {
         }
       })
       this.movies = genreMovie
+      if (!genre) {
+        this.movies = movies
+      }
     }
   },
   created: function () {
