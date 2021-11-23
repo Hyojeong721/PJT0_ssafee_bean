@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <li class="list-group-item">
-      <router-link :to="`/reviews/${review.id}`">{{ review.title }}[{{ commentCnt }}]</router-link>
-    </li>
-  </div>
+  <tr>
+    <th scope="row">{{review.id}}</th>
+    <td><router-link :to="`/reviews/${review.id}`">{{ review.title }}</router-link></td>
+    <td><router-link :to="`/reviews/${review.id}`">{글쓴이 }}</router-link></td>
+    <td><router-link :to="`/reviews/${review.id}`">{{createdAt}}</router-link></td>
+    <td><router-link :to="`/reviews/${review.id}`">{{ likeusersCnt }}</router-link></td>
+  </tr>
 </template>
 
 <script>
@@ -17,6 +19,8 @@ export default {
   data: function () {
     return {
       commentCnt: 0,
+      likeusersCnt: 0,
+      createdAt: null,
     }
   },
   methods: {
@@ -36,6 +40,9 @@ export default {
       })
         .then(res => {
           this.commentCnt = res.data.comment_count
+          this.createdAt= res.data.created_at
+          this.likeusersCnt = res.data.like_users.length
+          
         })
         .catch(err => {
           console.log(err)

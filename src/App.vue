@@ -73,8 +73,8 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       localStorage.removeItem('vuex')
-      // this.$router.push({ name: 'Home' })
-      this.$router.go()
+      this.$router.push({ name: 'Home' })
+      // this.$router.go()
     },
     movieSearch: function () {
       this.$router.push({
@@ -127,7 +127,9 @@ li {
   margin-left: 5px;
 }
 
-/* .right {
+body {
+  background-color: black;
+}
 
-} */
+
 </style>

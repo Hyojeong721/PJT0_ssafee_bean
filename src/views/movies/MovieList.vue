@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div name="movie" class="m-5">
+    <div name="movie" class="m-5" >
       <div class="row">
         <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
         </movie-item>

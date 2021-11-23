@@ -1,13 +1,32 @@
 <template>
-  <div>
-    <h1>영화 리뷰</h1>
-    <router-link to="/reviews/create">리뷰 작성</router-link>
-    <review-item
-      v-for="review in reviews"
-      :key="review.id"
-      :review="review"
-    >
-    </review-item>
+  <div id="reviewtable" style="color: white; text-decoration: none;">
+    <div class="m-3">
+      <h1>영화 리뷰</h1>
+    </div>
+    <div class="p-4">
+      <router-link to="/reviews/create">리뷰 작성</router-link>
+    </div>
+    <div style="width: 1000px">
+      <table class="table table-dark table-hover table-bordered">
+        <thead>
+          <tr class="col">
+            <th scope="col">게시번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">글쓴이</th>
+            <th scope="col">작성일</th>
+            <th scope="col">좋아요 수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <review-item
+            v-for="review in reviews"
+            :key="review.id"
+            :review="review"
+          >
+          </review-item>
+        </tbody>  
+      </table>
+    </div>
   </div>
 </template>
 
@@ -40,7 +59,7 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          // console.log(res)
+          console.log(res.data)
           this.reviews = res.data
           this.$store.dispatch('selectedReview', this.reviews)
         })
@@ -60,5 +79,15 @@ export default {
 </script>
 
 <style>
-
+#reviewtable {
+  margin: 30px;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+thead {
+  color: white;
+  font-size: 20px;
+}
 </style>

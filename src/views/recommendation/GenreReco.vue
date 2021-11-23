@@ -1,7 +1,7 @@
 <template>
   <div id="genreReco">
-    <h3 class="p-4">원하는 장르를 선택하세요.</h3>
     <div class="row" style="text-align: center;">
+      <h3 class="p-5">원하는 장르를 선택하세요.</h3>
       <div id="genreli" class="mt-3" style="width:810px; float:left; margin:0 auto;">
         <li class="genreli">
           <span @click="onGenre(28)">액션</span>
