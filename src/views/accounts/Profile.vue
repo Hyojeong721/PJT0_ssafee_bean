@@ -1,39 +1,46 @@
 <template>
-  <div class="container">
-    <h1>프로필</h1>
-    <div>
-      <img :src="profileURL" alt="">
-      <input type="file" accept="image/*" @change="fileSrc">
-    </div>
-    <div>
-      <h2>사용자: {{ user.username }}</h2>
-      <hr>
-      <h4>MBTI</h4>
-      <select name="selectMBTI" v-model="user.mbti">
-        <option>없음</option>
-        <option>ISTJ</option>
-        <option>ISTP</option>
-        <option>ISFJ</option>
-        <option>ISFP</option>
-        <option>INTJ</option>
-        <option>INTP</option>
-        <option>INFJ</option>
-        <option>INFP</option>
-        <option>ESTJ</option>
-        <option>ESTP</option>
-        <option>ESFJ</option>
-        <option>ESFP</option>
-        <option>ENTJ</option>
-        <option>ENTP</option>
-        <option>ENFJ</option>
-        <option>ENFP</option>
-      </select>
-      <hr>
-      <p>마일리지: {{ user.mileage }}</p>
-      <p>카카오페이 연동: {{ kakao }}</p>
-    </div>
-    <div>
-      <button @click="profileUpdate">프로필 수정</button>
+  <div class="container" tabindex="-1">
+    <div class="profile">
+      <div class="mb-5">
+        <h1>프로필</h1>
+      </div>
+      <div name="profile-content" class="row">
+        <div class="col-6">
+          <img :src="profileURL" alt="">
+          <input type="file" accept="image/*" @change="fileSrc">
+        </div>
+        <div class="col-6">
+          <h2>사용자: {{ user.username }}</h2>
+          <hr>
+          <h4>MBTI</h4>
+          <select style="width:100px; height:40px;" name="selectMBTI" v-model="user.mbti">
+            <option>없음</option>
+            <option>ISTJ</option>
+            <option>ISTP</option>
+            <option>ISFJ</option>
+            <option>ISFP</option>
+            <option>INTJ</option>
+            <option>INTP</option>
+            <option>INFJ</option>
+            <option>INFP</option>
+            <option>ESTJ</option>
+            <option>ESTP</option>
+            <option>ESFJ</option>
+            <option>ESFP</option>
+            <option>ENTJ</option>
+            <option>ENTP</option>
+            <option>ENFJ</option>
+            <option>ENFP</option>
+          </select>
+          <hr>
+          <p>마일리지: {{ user.mileage }}</p>
+          <p>카카오페이 연동: {{ kakao }}</p>
+        </div>
+      </div>
+      <div class="mt-5">
+        <button @click="profileUpdate">프로필 수정</button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -131,5 +138,14 @@ export default {
 </script>
 
 <style>
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 30px;
+}
 
 </style>

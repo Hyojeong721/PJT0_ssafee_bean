@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <div id="nav" >
-      <nav class="navbar fixed-top navbar-expand-md navbar-light mt-2" style="background-color: rgb(33, 54, 27);">
+    <div id="nav">
+      <nav class="navbar fixed-top navbar-expand-md navbar-light" style="background-color: black;">
         <div class="container-fluid">
           <router-link class="navbar-brand" to="/">홈</router-link> 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,7 +108,7 @@ export default {
 
 #nav {
   padding: 35px;
-  background-color: rgb(33, 54, 27);
+  background-color: black;
 }
 
 #nav a {
@@ -127,7 +127,8 @@ li {
 }
 
 body {
-  background-color: black;
+  background-color: rgb(20, 21, 23);
+  color: white;
 }
 
 
