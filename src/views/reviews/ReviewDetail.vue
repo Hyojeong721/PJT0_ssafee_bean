@@ -4,8 +4,9 @@
       <h1>리뷰 정보</h1>
       <h3>제목: {{ review[0].title }}</h3>
       <p>내용: {{ review[0].content }}</p>
-      <p>생성시각: {{ review[0].created_at }}</p>
-      <p>수정시각: {{ review[0].updated_at }}</p>
+      <p>작성자: {{ review[0].user_name }}</p>
+      <p>생성시각: {{ review[0].created_at | moment('YYYY-MM-DD') }}</p>
+      <p>수정시각: {{ review[0].updated_at | moment('YYYY-MM-DD') }}</p>
       <i
         v-if="liked"
         class="fas fa-heart"

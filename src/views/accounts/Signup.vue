@@ -26,14 +26,6 @@
         @keyup.enter="signup"
       >
     </div>
-    <!-- <div>
-      <label for="avatarThumbnail">사진 등록: </label>
-      <input 
-        type="file"
-        id="avatarThumbnail"
-        v-model="credentials.avatarThumbnail"
-      >
-    </div> -->
     <button @click="signup">회원가입</button>
   </div>
 </template>
@@ -50,9 +42,6 @@ export default {
         password: null,
         passwordConfirmation: null,
         avatarThumbnail: null,
-        // mbti: null,
-        // mileage: null,
-        // pay: false,
       }
     }
   },
@@ -65,11 +54,10 @@ export default {
         data: this.credentials
       })
         .then(() => {
-          // console.log(res)
           this.$router.push({ name: 'Login'})
         })
         .catch(err => {
-          console.log(err)
+          alert(err.response.data.error)
         })
     }
   }

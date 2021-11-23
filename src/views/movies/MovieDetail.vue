@@ -3,15 +3,8 @@
     <div class="card-body offset-md-3 col-6">
       <h2>{{ movie.title }}</h2>
       <div>
-        <vue-star-rate
-          :rateRange="rankData.user_rank"
-          :maxIcon="5"
-          :iconHeight="22"
-          :iconWidth="22"
-          :hasCounter="true"
-          iconShape="star"
-          @ratingSet="myRating"
-        ></vue-star-rate>
+        <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
+        <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
         <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
         <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -28,12 +21,7 @@
                   @ratingSet="myRatingUpdate"
                 ></vue-star-rate>
               </div>
-              <!-- <div class="modal-body">
-                <h5>내용</h5>
-                <input type="text" v-model="review[0].content">
-              </div> -->
               <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-primary">저장</button> -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
               </div>
             </div>
@@ -121,7 +109,8 @@ export default {
       })
         .then(res => {
           console.log(res)
-          this.$router.go()
+          this.rankData.user_rank = rating
+          this.getUserRank()
         })
         .catch(err => {
           console.log(err)
@@ -153,7 +142,8 @@ export default {
       })
         .then(res => {
           console.log(res)
-          this.$router.go()
+          this.getUserRank()
+          // this.$router.go()
         })
         .catch(err => {
           console.log(err)
@@ -196,15 +186,10 @@ export default {
           this.rankData.user_rank = userRank
           this.$store.dispatch('userRank', userRank)
         })
-        .catch(err => {
-          console.log(err)
-          const userRank = null
+        .catch(() => {
+          const userRank = 0
           this.rankData.user_rank = userRank
           this.$store.dispatch('userRank', userRank)
-        })
-        .finally(() => {
-          // 새로고침
-          // this.$router.go()
         })
     },
   },
@@ -215,7 +200,6 @@ export default {
     },
   },
   created: function () {
-    const now_movie = this.$route.params.now_movie
     const movie_id = this.$route.params.movie_id
     const movies = this.$store.state.movies
     if (movie_id) {
@@ -225,12 +209,8 @@ export default {
         }
       })
       this.movie = selectedmovie[0]
-      
       this.rankData.movie = selectedmovie[0].id
       this.rankData.user = this.$store.state.userInfo.id
-    } else {
-      
-      this.movie = now_movie
     }
     this.getUserLikes()
     this.getUserRank()

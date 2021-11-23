@@ -39,7 +39,6 @@ export default {
     axios({
       method: 'get',
       url: `${Django_URL}/movies/`,
-      headers: this.setToken(),
       params: {
         q: q
       }
