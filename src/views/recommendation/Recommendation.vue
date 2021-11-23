@@ -1,15 +1,16 @@
 <template>
   <div>
-    <div id="nav">
-      <router-link to="/recommendation/genre">장르별 추천</router-link> |
-      <router-link to="/recommendation/rank">평점별 추천</router-link> |
-      <router-link to="/recommendation/mbti">MBTI 추천</router-link>
-    
+    <div id="reconav">
+      <router-link class="text" to="/recommendation/genre">장르별</router-link> |
+      <router-link class="text" to="/recommendation/rank">평점별</router-link> |
+      <router-link class="text" to="">MBTI</router-link>   
     </div>
-      <div class="mt-3">
+
+      <div class="">
         <genre-reco>
         </genre-reco>
       </div>
+
   </div>
 </template>
 
@@ -26,5 +27,13 @@ export default {
 </script>
 
 <style>
-
+#reconav {
+  padding: 19px;
+  background-color: black;
+}
+.text {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+}
 </style>

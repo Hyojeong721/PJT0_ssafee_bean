@@ -1,5 +1,5 @@
 <template>
-  <div name="movie" class="col-2">
+  <div name="movie" class="col-3">
     <div class="card">
       <!-- 영화디테일 -->
       <router-link
@@ -7,11 +7,9 @@
         @click="selectedMovie(movie.id)"
         style="color: black; text-decoration: none"
       >
-      <div>
-        <img class="card-img-top" :src="imageURL" alt="movieImage" />
-        <h5 class="card-title">{{ movie.title }}</h5>
-        <p>{{ movie.genres }}</p>
-      </div>
+      
+      <img class="img" :src="imageURL" alt="movieImage">
+      
       </router-link>
     </div>
   </div>
@@ -46,4 +44,18 @@ export default {
 </script>
 
 <style>
+.card {
+  height: 400px;
+  
+  margin-top: 30px;
+
+  overflow: hidden;
+  float: left;      
+}
+.img {
+  width: 250px;
+  height: 400px;
+  background-color: rgb(0 0 0 / 20%); 
+      
+}
 </style>

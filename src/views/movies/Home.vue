@@ -1,13 +1,15 @@
 <template>
-  <div class="row">
-      <h1>Home</h1>
-      <now-movie-list
-      v-for="movie in movies"
-      :key="movie.id"
-      :movie="movie"
-      >
-      </now-movie-list>
-
+  <div id="home">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"> 
+      <div class="carousel-inner"> 
+        <now-movie-list
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+        >
+        </now-movie-list>
+      </div>  
+    </div>
   </div>
 </template>
 
@@ -51,5 +53,26 @@ export default {
 </script>
 
 <style>
+#home {
+  background-color: black;
+}
+/* .carousel {
+  width: 640px;
+  height: 720px;
+}
 
+
+.carousel-inner{
+  width:auto;
+  height:790px; 
+}
+.carousel-item{
+  width: auto;
+  height:100%;
+}
+.d-block {
+  display:block;
+  width: 100%;
+  height: 100%;
+} */
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div name="genres" class="row justify-content-start">
+  <div id="genres">
+    <div  class="row justify-content-start">
       <div>
-        <h2 class="col-2">영화</h2>
+        <h2 class="m-4" style="color:white">장르를 선택하세요</h2>
       </div>
       <div class="offset-md-1 col-2">
-        <select @change="onGenre" name="selectgenres">
+        <select style="width:220px; height:40px; " @change="onGenre" name="selectgenres">
           <option value="">모든 장르</option>
           <option value="28">액션</option>
           <option value="12">모험</option>
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div name="movie" class="m-3">
-      <div class="row justify-content-md-center">
+    <div name="movie" class="m-5">
+      <div class="row">
         <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
         </movie-item>
       </div>
@@ -76,4 +76,7 @@ export default {
 </script>
 
 <style>
+#genres {
+  background-color: black;
+}
 </style>
