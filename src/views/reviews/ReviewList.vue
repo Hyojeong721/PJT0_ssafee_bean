@@ -3,10 +3,10 @@
     <div class="m-3">
       <h1>영화 리뷰</h1>
     </div>
-    <div class="p-4">
-      <router-link to="/reviews/create">리뷰 작성</router-link>
+    <div align="right" class="btnsytle py-3">
+      <router-link id="reviewcreate" class="btn" to="/reviews/create">리뷰 작성</router-link>
     </div>
-    <div style="width: 1000px">
+    <div class="tablesytle">
       <table class="table table-dark table-hover table-bordered">
         <thead>
           <tr class="col">
@@ -33,7 +33,6 @@
 <script>
 import ReviewItem from './ReviewItem.vue'
 import axios from 'axios'
-
 export default {
   name: 'ReviewList',
   components: {
@@ -79,6 +78,10 @@ export default {
 </script>
 
 <style>
+#reviewcreate {
+  background-color: thistle;
+  color: yellow;
+}
 #reviewtable {
   margin: 30px;
 }
@@ -89,5 +92,17 @@ a {
 thead {
   color: white;
   font-size: 20px;
+}
+.btnsytle {
+  width: 65%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tablesytle {
+  width: 65%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
