@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <li class="list-group-item">
-      <router-link :to="`/reviews/${review.id}`">{{ review.title }}[{{ commentCnt }}]{{ review.user_name }}{{ review.created_at | moment('YYYY-MM-DD')}}</router-link>
-      {{ review.created_at | moment("from", "now") }}
-    </li>
-  </div>
+  <tr>
+    <th scope="row">{{review.id}}</th>
+    <td><router-link :to="`/reviews/${review.id}`">{{ review.title }}</router-link></td>
+    <td><router-link :to="`/reviews/${review.id}`">{{ review.user_name }}</router-link></td>
+    <td><router-link :to="`/reviews/${review.id}`">{{ review.created_at | moment('YYYY-MM-DD' }}</router-link></td>
+    <td><router-link :to="`/reviews/${review.id}`">{{ likeusersCnt }}</router-link></td>
+  </tr>
 </template>
 
 <script>
 import axios from 'axios'
-
 
 export default {
   name: 'ReviewItem',
@@ -19,6 +19,7 @@ export default {
   data: function () {
     return {
       commentCnt: 0,
+      likeusersCnt: 0,
     }
   },
   methods: {
@@ -38,6 +39,8 @@ export default {
       })
         .then(res => {
           this.commentCnt = res.data.comment_count
+          this.likeusersCnt = res.data.like_users.length
+          
         })
         .catch(err => {
           console.log(err)

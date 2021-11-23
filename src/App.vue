@@ -127,7 +127,9 @@ li {
   margin-left: 5px;
 }
 
-/* .right {
+body {
+  background-color: black;
+}
 
-} */
+
 </style>

@@ -53,7 +53,7 @@ export default {
   float: left;      
 }
 .img {
-  width: 250px;
+  width: 290px;
   height: 400px;
   background-color: rgb(0 0 0 / 20%); 
       

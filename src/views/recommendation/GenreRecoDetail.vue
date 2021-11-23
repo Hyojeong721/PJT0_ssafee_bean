@@ -2,12 +2,14 @@
   <div class="m-3">
     <div class="row justify-content-md-center">
       <h2>{{ genreName }} 장르 영화들</h2>
-      <movie-item
-      v-for="movie in movies"
-      :key="movie.id"
-      :movie="movie"
-      >
-      </movie-item>
+      <div class="row">
+        <movie-item
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+        >
+        </movie-item>
+      </div>
     </div>
   </div>
 
