@@ -17,7 +17,6 @@
 
 <script>
 import MovieItem from '../movies/MovieItem.vue'
-import axios from 'axios'
 import _ from 'lodash'
 
 export default {
@@ -25,52 +24,33 @@ export default {
   data: function () {
     return {
       movies: null,
-      genre: null,
-      genreName: null,
+      genreName: this.$store.state.genreName,
     }
   },
   components:{
     MovieItem,
   },
   methods: {
-    setToken: function () {
-      const token = localStorage.getItem("jwt")
-      const config = {
-        Authorization: `JWT ${token}`,
+    getGenreMovies: function () {
+      const genre = this.$route.params.genre_id
+      const movies = this.$store.state.movies
+      const genreMovie = movies.filter ((movie) => {
+        const genres = movie.genres
+        if (genres.includes(genre)) {
+          return movie
+        }
+      })
+      if (genreMovie.length >= 10) {
+
+        this.movies = _.sampleSize(genreMovie, 10)
       }
-      return config;
+      else {
+        this.movies = genreMovie
+      }
     },
   },
   created: function () {
-    const genre = this.$route.params.genre_id
-    const movies = this.$store.state.movies
-    const genreMovie = movies.filter ((movie) => {
-      const genres = movie.genres
-      if (genres.includes(genre)) {
-        return movie
-      }
-    })
-    if (genreMovie.length >= 10) {
-
-      this.movies = _.sampleSize(genreMovie, 10)
-    }
-    else {
-      this.movies = genreMovie
-    }
-    this.genre = genre
-    console.log(this.movies)
-    const Django_URL = 'http://127.0.0.1:8000'
-    axios({
-      method: 'get',
-      url: `${Django_URL}/movies/recommendation/genre/${genre}/`,
-      headers: this.setToken()
-    })
-      .then((res) => {
-        this.genreName = res.data.name
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getGenreMovies()
   },
 }
 </script>

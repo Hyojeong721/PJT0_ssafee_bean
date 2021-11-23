@@ -15,17 +15,17 @@
       />
     </div>
     <button @click="login">로그인</button>
-    <!-- <GoogleLogin class="big-button" :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin> -->
-    <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">Login</GoogleLogin>
+    <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess"></GoogleLogin>
+  
   </div>
 </template>
 
 <script>
-import axios from "axios"
+import axios from 'axios'
 import GoogleLogin from 'vue-google-login'
 
 export default {
-  name: "Login",
+  name: 'Login',
   data: function () {
     return {
       credentials: {
@@ -50,22 +50,22 @@ export default {
       const Django_URL = 'http://127.0.0.1:8000'
 
       axios({
-        method: "post",
+        method: 'post',
         url: `${Django_URL}/accounts/api-token-auth/`,
         data: this.credentials,
       })
         .then((res) => {
-          localStorage.setItem("jwt", res.data.token);
-          this.$emit("login");
-          this.$store.dispatch("loginUser", this.credentials)
-          this.$router.push({ name: "Profile" })
+          localStorage.setItem('jwt', res.data.token)
+          this.$emit('login')
+          this.$store.dispatch('loginUser', this.credentials)
+          this.$router.push({ name: 'Profile' })
           // 굳이 profile 경유해야 하는가
           setTimeout(() => {
-            this.$router.push({ name: "Home" })
+            this.$router.push({ name: 'Home' })
           }, 1);
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          alert('잘못된 정보를 입력하였습니다.')
         })
     },
     onSuccess(googleUser) {

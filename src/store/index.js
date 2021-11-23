@@ -15,6 +15,8 @@ export default new Vuex.Store({
     selectedReview: [],
     userInfo: {},
     userRank: 0,
+    likeMovies: [],
+    genreName: '',
   },
 
   mutations: {
@@ -30,8 +32,14 @@ export default new Vuex.Store({
     USER_INFO: function (state, userInfo) {
       state.userInfo = userInfo
     },
-    USER_RANK: function(state, userRank) {
+    USER_RANK: function (state, userRank) {
       state.userRank = userRank
+    },
+    LIKE_MOVIES: function (state, likeMovies) {
+      state.likeMovies = likeMovies
+    },
+    GENRE_NAME: function (state, genreName) {
+      state.genreName = genreName
     },
   },
 
@@ -58,6 +66,12 @@ export default new Vuex.Store({
     },
     userRank: function ({ commit }, userRank) {
       commit('USER_RANK', userRank)
+    },
+    likeMovies: function ({ commit }, likeMovies) {
+      commit('LIKE_MOVIES', likeMovies)
+    },
+    genreName: function ({ commit }, genreName) {
+      commit('GENRE_NAME', genreName)
     },
   },
   modules: {

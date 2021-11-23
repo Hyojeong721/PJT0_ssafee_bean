@@ -2,7 +2,7 @@
   <div class="container">
     <h1>프로필</h1>
     <div>
-      <img :src="`http://127.0.0.1:8000${user.avatar_thumbnail}`" alt="">
+      <img :src="profileURL" alt="">
       <input type="file" accept="image/*" @change="fileSrc">
     </div>
     <div>
@@ -47,6 +47,7 @@ export default {
     return {
       user: {},
       file: '',
+      profileURL: 'http://127.0.0.1:8000/accounts/avatars/default.jpg',
     }
   },
   methods: {
@@ -59,7 +60,6 @@ export default {
     },
     fileSrc: function (event) {
       this.file = event.target.files[0]
-      console.log(this.file)
     },
     getUser: function () {
       const username = this.$store.state.loginUser
@@ -74,6 +74,9 @@ export default {
           if (this.user.mbti == 'NULL') {
             this.user.mbti = '없음'
           }
+          if (res.data.avatar_thumbnail) {
+            this.profileURL = `http://127.0.0.1:8000${res.data.avatar_thumbnail}`
+          }
           this.$store.dispatch('userInfo', this.user)
         })
         .catch(err => {
@@ -81,23 +84,25 @@ export default {
         })
     },
     profileUpdate: function() {
-      const username = this.$store.state.loginUser
+      // 이미지 저장 FormData 변수 생성
       var formData = new FormData()
       if (this.file) {
         formData.append('avatar_thumbnail', this.file)
       } else {
         formData.append('avatar_thumbnail', this.user.avatar_thumbnail)
       }
-      formData.append("mbti", this.user.mbti)
-      formData.append("mileage", this.user.mileage)
-      formData.append("pay", this.user.pay)
+      formData.append('mbti', this.user.mbti)
+      formData.append('mileage', this.user.mileage)
+      formData.append('pay', this.user.pay)
+
+      const username = this.$store.state.loginUser
       const Django_URL = 'http://127.0.0.1:8000'
       axios({
         method: 'put',
         url: `${Django_URL}/accounts/${username}/`,
         data: formData,
         headers: {
-          Authorization: `JWT ${localStorage.getItem('jwt')}`,
+          'Authorization': `JWT ${localStorage.getItem('jwt')}`,
           'Content-Type': 'multipart/form-data'
         }
       })
