@@ -1,13 +1,15 @@
 <template>
   <div>
     <li class="list-group-item">
-      <router-link :to="`/reviews/${review.id}`">{{ review.title }}[{{ commentCnt }}]</router-link>
+      <router-link :to="`/reviews/${review.id}`">{{ review.title }}[{{ commentCnt }}]{{ review.user_name }}{{ review.created_at | moment('YYYY-MM-DD')}}</router-link>
+      {{ review.created_at | moment("from", "now") }}
     </li>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+
 
 export default {
   name: 'ReviewItem',
