@@ -1,8 +1,8 @@
 <template>
   <div id="reviewdetailtext">
-
+  
     <div name="page" class="tablesytle">
-     
+    
       <div name="review" class="board-wrap">
         <div class="detail-head">
           <div class="line-set">
@@ -77,6 +77,7 @@
               <div class="my-2">
                 <label for="title" class="form-label m-3" ><h5 class="modal-title" id="exampleModalLabel">제목</h5></label>
                 <input id="title" type="text" v-model="review[0].title">
+
               </div>
               <div class="my-2">
                 <label for="content" class="form-label m-3"><h5>내용</h5></label>
@@ -160,12 +161,6 @@ export default {
         })
           .then(res => {
             console.log(res)
-            // this.$router.push({ 
-            //   name: 'ReviewDetail',
-            //   params: {
-            //     review_id: this.review[0].id
-            //   }
-            // })
           })
           .catch(err => {
             console.log(err)
@@ -279,6 +274,11 @@ export default {
     this.review = res
     this.getLikeInfo()
     this.getComments()
+  },
+  computed: {
+    content() { 
+      return this.review[0].content.split('\n').join('<br>')
+    }
   },
 }
 </script>

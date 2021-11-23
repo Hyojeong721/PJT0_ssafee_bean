@@ -1,21 +1,21 @@
 <template>
   <div id="home">
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"> 
-      <div class="carousel-inner"> 
-        <now-movie-list
-        v-for="movie in movies"
-        :key="movie.id"
-        :movie="movie"
-        >
-        </now-movie-list>
-      </div>  
-    </div>
+    <carousel-3d :controls-visible="true" :width="500" :height="700" :border="0" :controls-width="50" :controls-height="60">
+      <slide v-for="(slide, i) in slides" :index="i" :key="i">
+        <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
+          <router-link router-link :to="`/movies/${movies[i].id}`">
+            <img :src="`https://image.tmdb.org/t/p/w500/${movies[i].poster_path}`" alt="" :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >=0)}">
+          </router-link>
+        </template>
+      </slide>
+    </carousel-3d>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import NowMovieList from './NowMovieList.vue'
+// import NowMovieList from './NowMovieList.vue'
+import { Carousel3d, Slide } from 'vue-carousel-3d'
 
 const API_KEY = '65bf23772658c6b898a2865e99430c95'
 
@@ -24,10 +24,24 @@ export default {
   data: function () {
     return {
       movies: [],
+      slides: 20
     }
   },
   components: {
-    NowMovieList,
+    // NowMovieList,
+    Carousel3d,
+    Slide
+  },
+  methods: {
+    selectedNowMovie: function (now_movie) {
+      console.log(now_movie)
+      this.$router.push({
+        name: "MovieDetail",
+        params: {
+          movie_id: now_movie,
+        },
+      })
+    },
   },
   created: function () {
     axios({
@@ -36,6 +50,7 @@ export default {
     })
       .then ((res) => {
         this.movies = res.data.results
+        this.slides = this.movies.length
       })
       .catch((err) => {
         console.log(err)
@@ -48,23 +63,4 @@ export default {
 #home {
   background-color: black;
 }
-/* .carousel {
-  width: 640px;
-  height: 720px;
-}
-
-
-.carousel-inner{
-  width:auto;
-  height:790px; 
-}
-.carousel-item{
-  width: auto;
-  height:100%;
-}
-.d-block {
-  display:block;
-  width: 100%;
-  height: 100%;
-} */
 </style>

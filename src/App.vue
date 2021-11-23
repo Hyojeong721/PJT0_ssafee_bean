@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div id="nav" >
-      <nav class="navbar fixed-top navbar-expand-md navbar-light" style="background-color: rgb(33, 54, 27);">
+      <nav class="navbar fixed-top navbar-expand-md navbar-light mt-2" style="background-color: rgb(33, 54, 27);">
         <div class="container-fluid">
           <router-link class="navbar-brand" to="/">홈</router-link> 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,19 +11,18 @@
             <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <router-link class="nav-link" to='/movies'>영화</router-link> 
-              </li>
+              </li>      
               <li class="nav-item">
                 <router-link class="nav-link"  to='/recommendation'>추천</router-link> 
               </li>
               <li class="nav-item">
                 <router-link class="nav-link"  to="/reviews">리뷰</router-link> 
               </li>
-              <li class="nav-item">
-                <input type="text" v-model="userQuery" @keyup.enter="movieSearch">
-                <button @click="movieSearch">검색</button>
-              </li>
             </ul>
-
+            <form class="form-inline my-2 my-lg-0 col-xs-4">
+              <input class="form-control mr-sm-2" type="search" placeholder="영화 검색" v-model="userQuery" @keyup.enter="movieSearch">
+            </form>
+            <button class="btn btn-outline-success my-2 my-sm-0" @click="movieSearch">검색</button>
             <ul v-if="isLogin" class="navbar-nav navbar-right ">
               <!-- <span v-if="isLogin"> -->
                 <li class="nav-item">
@@ -35,7 +34,7 @@
                 <li class="nav-item">
                   <router-link class="nav-link" @click.native="logout" to="#">로그아웃</router-link>
                 </li>
-                <li v-if="this.$store.state.userInfo.id == 1" class="nav-item">
+                <li v-if="this.$store.state.userInfo.id == 1" class="nav-item pt-2">
                   <a href="http://127.0.0.1:8000/admin/">관리자</a>
                 </li>
               <!-- </span> -->

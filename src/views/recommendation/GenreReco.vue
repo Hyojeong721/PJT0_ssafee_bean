@@ -1,5 +1,10 @@
 <template>
   <div id="genreReco">
+    <!-- <div id="reconav">
+      <router-link class="text" to="/recommendation/genre">장르별</router-link> |
+      <router-link class="text" to="/recommendation/rank">평점별</router-link> |
+      <router-link class="text" to="/recommendation/mbti">MBTI</router-link>   
+    </div> -->
     <div class="row" style="text-align: center;">
       <h3 class="p-5">원하는 장르를 선택하세요.</h3>
       <div id="genreli" class="mt-3" style="width:810px; float:left; margin:0 auto;">

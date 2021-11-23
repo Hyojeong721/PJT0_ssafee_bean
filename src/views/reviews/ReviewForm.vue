@@ -3,7 +3,6 @@
     <div class="my-5 ">
       <h1>리뷰 작성</h1>
     </div>
-    
     <div id="reviewcreatetable">
       <div class="m-3"> 
         <div class="my-2">
@@ -23,9 +22,7 @@
         </div>
         <div class="d-md-flex justify-content-end mt-2">
           <input class="btn btn-primary" type="button" value="작성" @click="createReview">
-
         </div>
-
       </div>
     </div>
   </div>
@@ -33,6 +30,7 @@
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'ReviewForm',
@@ -43,8 +41,29 @@ export default {
     }
   },
   methods: {
+    mileageUpdate: function () {
+      const token = localStorage.getItem('jwt')
+      const Django_URL = 'http://127.0.0.1:8000'
+      const userName = this.$store.state.userInfo.username
+      const mileage = this.$store.state.userInfo.mileage + 3
+      axios({
+        method: 'put',
+        url: `${Django_URL}/accounts/${userName}/mileage/`,
+        data: mileage,
+        headers: {
+          Authorization: `JWT ${token}`
+        }
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     createReview: function () {
       const token = localStorage.getItem('jwt')
+      const Django_URL = 'http://127.0.0.1:8000'
       const review = {
         title: this.title,
         content: this.content,
@@ -56,7 +75,7 @@ export default {
       if (review.title) {
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/community/',
+          url: `${Django_URL}/community/`,
           data: review,
           headers: {
             Authorization: `JWT ${token}`
@@ -68,10 +87,10 @@ export default {
           })
           .catch(err => {
             console.log(err)
-            alert('내용을 입력하세요~^^')
+            swal('오류', '리뷰 내용을 입력하세요!', 'error')
           })
       } else {
-        alert('제목을 입력하세요~^^')
+        swal('오류', '리뷰 제목을 입력하세요!', 'error')
       }
 
     },

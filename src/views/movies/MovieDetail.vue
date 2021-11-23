@@ -52,6 +52,7 @@
 import axios from 'axios'
 // vue 별점 기능 구현 라이브러리
 import vueStarRate from 'vue-js-star-rating'
+import swal from 'sweetalert'
 
 export default {
   name: 'MovieDetail',
@@ -127,7 +128,7 @@ export default {
       })
         .then(res => {
           console.log(res)
-          alert(res.data.message)
+          swal('완료', res.data.message, 'success')
         })
         .catch(err => {
           console.log(err)
@@ -143,7 +144,6 @@ export default {
         .then(res => {
           console.log(res)
           this.getUserRank()
-          // this.$router.go()
         })
         .catch(err => {
           console.log(err)
