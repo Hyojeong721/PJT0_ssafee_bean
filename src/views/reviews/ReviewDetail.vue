@@ -3,7 +3,7 @@
     <div>
       <h1>리뷰 정보</h1>
       <h3>제목: {{ review[0].title }}</h3>
-      <p>내용: {{ review[0].content }}</p>
+      <p>내용:</p> <p v-html="content"></p>
       <p>작성자: {{ review[0].user_name }}</p>
       <p>생성시각: {{ review[0].created_at | moment('YYYY-MM-DD') }}</p>
       <p>수정시각: {{ review[0].updated_at | moment('YYYY-MM-DD') }}</p>
@@ -94,7 +94,8 @@ export default {
         user: this.$store.state.userInfo.id,
         movie: 566525,
         created_at: this.review[0].created_at,
-        updated_at: new Date()
+        updated_at: new Date(),
+        user_name: this.$store.state.userInfo.username
       }
       if (review.title) {
         axios({
@@ -105,12 +106,6 @@ export default {
         })
           .then(res => {
             console.log(res)
-            // this.$router.push({ 
-            //   name: 'ReviewDetail',
-            //   params: {
-            //     review_id: this.review[0].id
-            //   }
-            // })
           })
           .catch(err => {
             console.log(err)
@@ -224,6 +219,11 @@ export default {
     this.review = res
     this.getLikeInfo()
     this.getComments()
+  },
+  computed: {
+    content() { 
+      return this.review[0].content.split('\n').join('<br>')
+    }
   },
 }
 </script>

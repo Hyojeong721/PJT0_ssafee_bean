@@ -17,7 +17,7 @@ import axios from 'axios'
 import _ from 'lodash'
 
 export default {
-  name: 'MBTIReco',
+  name: 'MbtiReco',
   components: {
     MovieItem,
   },

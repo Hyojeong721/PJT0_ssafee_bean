@@ -32,6 +32,7 @@
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'Signup',
@@ -57,7 +58,7 @@ export default {
           this.$router.push({ name: 'Login'})
         })
         .catch(err => {
-          alert(err.response.data.error)
+          swal('오류', err.response.data.error, 'error')
         })
     }
   }

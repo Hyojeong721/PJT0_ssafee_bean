@@ -45,7 +45,7 @@ export default {
 
 <style>
 .card {
-  height: 400px;
+  
   
   margin-top: 30px;
 

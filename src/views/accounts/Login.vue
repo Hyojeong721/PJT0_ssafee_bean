@@ -15,14 +15,12 @@
       />
     </div>
     <button @click="login">로그인</button>
-    <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess"></GoogleLogin>
-  
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import GoogleLogin from 'vue-google-login'
+import swal from 'sweetalert'
 
 export default {
   name: 'Login',
@@ -32,18 +30,10 @@ export default {
         username: null,
         password: null,
       },
-      params: {
-        client_id: '527977877033-nkv5b2vo72bgsk6hdsg4f1tl9fq1s0of.apps.googleusercontent.com'
-      },
-      renderParams: {
-        width: 250,
-        height: 50,
-        longtitle: true
-      }
     }
   },
   components: {
-    GoogleLogin
+
   },
   methods: {
     login: function () {
@@ -65,12 +55,9 @@ export default {
           }, 1);
         })
         .catch(() => {
-          alert('잘못된 정보를 입력하였습니다.')
+          swal('오류', '잘못된 정보를 입력하였습니다.', 'error')
         })
     },
-    onSuccess(googleUser) {
-      console.log(googleUser.getBasicProfile())
-    }
   },
 }
 </script>

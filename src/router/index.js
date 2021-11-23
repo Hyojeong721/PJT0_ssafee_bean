@@ -15,7 +15,7 @@ import Recommendation from '../views/recommendation/Recommendation.vue'
 import GenreReco from '../views/recommendation/GenreReco.vue'
 import GenreRecoDetail from '../views/recommendation/GenreRecoDetail.vue'
 import RankReco from '../views/recommendation/RankReco.vue'
-import MBTIReco from '../views/recommendation/MBTIReco.vue'
+import MbtiReco from '../views/recommendation/MbtiReco.vue'
 
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
@@ -72,8 +72,8 @@ const routes = [
   },
   {
     path: '/recommendation/mbti',
-    name: 'MBTIReco',
-    component: MBTIReco
+    name: 'MbtiReco',
+    component: MbtiReco
   },
   {
     path: '/reviews',
