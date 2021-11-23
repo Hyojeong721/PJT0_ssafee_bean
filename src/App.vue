@@ -18,6 +18,10 @@
               <li class="nav-item">
                 <router-link class="nav-link"  to="/reviews">리뷰</router-link> 
               </li>
+              <li class="nav-item">
+                <input type="text" v-model="userQuery" @keyup.enter="movieSearch">
+                <button @click="movieSearch">검색</button>
+              </li>
             </ul>
 
             <ul v-if="isLogin" class="navbar-nav navbar-right ">
@@ -31,6 +35,9 @@
                 <li class="nav-item">
                   <router-link class="nav-link" @click.native="logout" to="#">로그아웃</router-link>
                 </li>
+                <li v-if="this.$store.state.userInfo.id == 1" class="nav-item">
+                  <a href="http://127.0.0.1:8000/admin/">관리자</a>
+                </li>
               <!-- </span> -->
             </ul>
             <ul v-else class="navbar-nav navbar-right ">
@@ -43,16 +50,11 @@
               </li>
             <!-- </span> -->
             </ul>
-            
           </div>
-
-          
         </div>
-
       </nav>
-     
     </div>
-    <router-view @login="isLogin=true"/>
+    <router-view :key="$route.fullPath" @login="isLogin=true"/>
   </div>
 
 </template>
@@ -63,14 +65,26 @@ export default {
   data: function () {
     return {
       isLogin: false,
+      userQuery: '',
     }
   },
   methods: {
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
-      this.$router.push({ name: 'Home' })
-    }
+      localStorage.removeItem('vuex')
+      // this.$router.push({ name: 'Home' })
+      this.$router.go()
+    },
+    movieSearch: function () {
+      this.$router.push({
+        name: 'MovieSearch',
+        query: {
+          search_query: this.userQuery,
+        }
+      })
+      this.userQuery= ''
+    },
   },
   created: function () {
     const token = localStorage.getItem('jwt')

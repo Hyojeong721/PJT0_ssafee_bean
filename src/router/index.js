@@ -5,6 +5,7 @@ import Home from '../views/movies/Home.vue'
 import MovieList from '../views/movies/MovieList.vue'
 import LikeMovieList from '../views/movies/LikeMovieList.vue'
 import MovieDetail from '../views/movies/MovieDetail.vue'
+import MovieSearch from '../views/movies/MovieSearch.vue'
 
 import ReviewList from '../views/reviews/ReviewList.vue'
 import ReviewForm from '../views/reviews/ReviewForm.vue'
@@ -14,6 +15,7 @@ import Recommendation from '../views/recommendation/Recommendation.vue'
 import GenreReco from '../views/recommendation/GenreReco.vue'
 import GenreRecoDetail from '../views/recommendation/GenreRecoDetail.vue'
 import RankReco from '../views/recommendation/RankReco.vue'
+import MBTIReco from '../views/recommendation/MBTIReco.vue'
 
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
@@ -39,6 +41,11 @@ const routes = [
     component: MovieDetail
   },
   {
+    path: '/movies',
+    name: 'MovieSearch',
+    component: MovieSearch
+  },
+  {
     path: '/profile/likes',
     name: 'LikeMovieList',
     component: LikeMovieList
@@ -62,6 +69,11 @@ const routes = [
     path: '/recommendation/rank',
     name: 'RankReco',
     component: RankReco
+  },
+  {
+    path: '/recommendation/mbti',
+    name: 'MBTIReco',
+    component: MBTIReco
   },
   {
     path: '/reviews',
