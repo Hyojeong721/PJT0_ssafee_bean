@@ -45,8 +45,6 @@ export default {
 
 <style>
 .card {
-  
-  
   margin-top: 30px;
 
   overflow: hidden;
