@@ -1,7 +1,7 @@
 <template>
   <div id="movie-detail" class="card row">
     <span v-for="(genre, idx) in genres" :key="idx">
-        {{ gnere }}
+      {{ genre }}
     </span>
     <div class="card-body offset-md-2 col-8">
       <div class="movie-title">

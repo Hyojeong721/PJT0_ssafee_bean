@@ -19,6 +19,7 @@ export default new Vuex.Store({
     genreName: '',
     genresList: [],
     usersAvatar: [],
+    nowMovies: [],
   },
 
   mutations: {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
     USERS_AVATAR: function (state, usersAvatar) {
       state.usersAvatar = usersAvatar
     },
+    NOW_MOVIES: function (state, nowMovies) {
+      state.nowMovies = nowMovies
+    }
   },
 
   actions: {
@@ -87,6 +91,9 @@ export default new Vuex.Store({
     },
     usersAvatar: function ({ commit }, usersAvatar) {
       commit('USERS_AVATAR', usersAvatar)
+    },
+    nowMovies: function ({ commit }, nowMovies) {
+      commit('NOW_MOVIES', nowMovies)
     },
   },
   modules: {

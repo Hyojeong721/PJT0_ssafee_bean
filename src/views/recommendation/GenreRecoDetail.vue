@@ -17,7 +17,8 @@
 
 <script>
 import MovieItem from '../movies/MovieItem.vue'
-import _ from 'lodash'
+import axios from 'axios'
+// import _ from 'lodash'
 
 export default {
   name: 'GenreRecoDetail',
@@ -31,22 +32,41 @@ export default {
     MovieItem,
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem("jwt")
+      const config = {
+        Authorization: `JWT ${token}`,
+      }
+      return config;
+    },
     getGenreMovies: function () {
       const genre = this.$route.params.genre_id
-      const movies = this.$store.state.movies
-      const genreMovie = movies.filter ((movie) => {
-        const genres = movie.genres
-        if (genres.includes(genre)) {
-          return movie
-        }
+      const Django_URL = 'http://127.0.0.1:8000'
+      axios({
+        method: 'get',
+        url: `${Django_URL}/movies/recommendation/genre/${genre}/`,
+        headers: this.setToken(),
       })
-      if (genreMovie.length >= 10) {
+        .then(res => {
+          this.movies = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      // const movies = this.$store.state.movies
+      // const genreMovie = movies.filter ((movie) => {
+      //   const genres = movie.genres
+      //   if (genres.includes(genre)) {
+      //     return movie
+      //   }
+      // })
+      // if (genreMovie.length >= 10) {
 
-        this.movies = _.sampleSize(genreMovie, 10)
-      }
-      else {
-        this.movies = genreMovie
-      }
+      //   this.movies = _.sampleSize(genreMovie, 10)
+      // }
+      // else {
+      //   this.movies = genreMovie
+      // }
     },
   },
   created: function () {
