@@ -1,18 +1,87 @@
 <template>
   <div id="movie-detail" class="card row">
-    <span v-for="(genre, idx) in genres" :key="idx">
-      {{ genre }}
-    </span>
     <div class="card-body offset-md-2 col-8">
-      <div class="movie-title">
-        <span>{{ movie.title }}</span>
+      <div name="movie-header">
+        <div class="movie-title">
+          <span>{{ movie.title }}</span>
+        </div>
+        <div class="movie-original-title">
+          <span>&lt; {{ movie.original_title }} &gt;</span>
+        </div>
       </div>
       
-      <div name="movie-content" class="row">
+      <div name="movie-detail" class="row mt-5">
         <div name="movie-image" class="col-6">
           <img :src="imageURL" alt="movie image" class="card-img-top" />
         </div>
-        <div class="col-6">
+
+        <div id="movie-content" class="col-6">
+          <div class="rank">
+            <div name="tmdb" class="rank-frame row" >
+              <div class="tmdb-rank-title col-6">
+                <span>평점</span>
+              </div>
+              <div class="rank col">
+                {{ movie.rank }}
+              </div>
+            </div>
+            <div name="user" class="rank-frame row" >
+              <div class="tmdb-rank-title col-6">
+                <span>사용자 평점 </span>
+              </div>
+              <div class="rank col">
+                콩 들어갈 곳
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-info row">
+            <div name="movie-genre" class="mt-2">
+              <span style="font-weight: bold;">장르&nbsp; | &nbsp;</span>
+              <span v-for="(genre, idx) in genres" :key="idx">
+                {{ genre }} &nbsp;
+              </span> 
+            </div>
+            <div name="movie-related-date" >
+              <div class="movie-genre mt-2">
+                <span style="font-weight: bold;">개봉일&nbsp; | &nbsp;</span>
+                <span >{{ movie.release_date }}</span>
+              </div>
+            </div>
+          </div> 
+
+          <div name="i-want-see">
+            <div name="movie-like" class="col my-2">
+              <span>
+                <i
+                  v-if="liked"
+                  class="fas fa-heart"
+                  style="color: red"
+                  @click="updateLikes"
+                ></i>
+                <i
+                  v-else
+                  class="far fa-heart"
+                  style="color: white"
+                  @click="updateLikes"
+                ></i>
+              </span>
+                찜콩 +
+            </div> 
+          </div> 
+
+          <div class="movie-story">
+            <div class="movie-story-title mb-2">
+              줄거리
+            </div>
+            <div>
+              {{ movie.story }}
+            </div>
+
+          </div>
+
+        </div>
+
           <div name="movie-user-rank">
             <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
             <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
@@ -42,24 +111,11 @@
             <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
           </div>
         
-          <div name="movie-like">
-            <i
-              v-if="liked"
-              class="fas fa-heart"
-              style="color: red"
-              @click="updateLikes"
-            ></i>
-            <i
-              v-else
-              class="far fa-heart"
-              style="color: black"
-              @click="updateLikes"
-            ></i>
-            <span>{{ likeCount }}</span>명이 좋아합니다.
-          </div>
+            <!-- <span>{{ likeCount }}</span>명이 좋아합니다. -->
           
-          <p class="card-text">{{ movie.story }}</p>
-        </div>
+          
+          <!-- <p class="card-text">{{ movie.story }}</p> -->
+        
 
       </div>
     </div>
@@ -254,14 +310,40 @@ export default {
 </script>
 
 <style>
+  #movie-detail {
+    background-color: rgb(20, 21, 23);
+  }
 #movie-detail .movie-title {
   text-align: center;
-  margin: 1rem;
+  margin: 10px;
   font-weight: bold;
-  font-size: 60px;
+  font-size: 50px;
 }
-#movie-detail {
-  background-color: rgb(20, 21, 23);
+#movie-detail .movie-original-title {
+  text-align: center;
+  margin: 2px;
+  font-size: 20px;
+}
+.rank-frame {
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.rank-frame .tmdb-rank-title {
+  background-color: #633111;
+  border: 2px solid rgb(56, 56, 56);
+}
+.rank-frame .rank {
+  border: 2px solid rgb(56, 56, 56);
+}
+.movie-info {
+  font-size: 10px;
+}
+.movie-story {
+  font-size: 12px;
+}
+.movie-story-title {
+  font-size: 13px;
+  font-weight:700;
 }
 
 </style>
