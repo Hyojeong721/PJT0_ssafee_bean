@@ -1,7 +1,7 @@
 <template>
   <div id="home">
-    <h1 class="px-5 py-3">현재상영작</h1>
-    <carousel-3d v-if="movies" :controls-visible="true" :width="500" :height="700" :border="0" :controls-width="50" :controls-height="60">
+    <h1 class="px-5 pt-1">현재상영작</h1>
+    <carousel-3d v-if="movies" :controls-visible="true" :width="500" :height="600" :border="0" :controls-width="50" :controls-height="60">
       <slide v-for="(slide, i) in slides" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <router-link router-link :to="`/movies/${movies[i].id}`">
