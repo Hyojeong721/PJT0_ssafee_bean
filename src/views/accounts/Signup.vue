@@ -79,6 +79,7 @@ export default {
   }
 }
 </script>
+
 <style>
 .signup-title {
   text-align: center;
@@ -100,6 +101,4 @@ export default {
   width: 60%;
   border-radius: 70px;
 }
-
-
 </style>

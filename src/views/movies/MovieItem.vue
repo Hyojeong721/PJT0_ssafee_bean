@@ -1,23 +1,18 @@
 <template>
-  <div name="movie" class="col-8 col-sm-5 col-md-4 col-lg-2" style="width: 250px; height:400px;">
-
-    <div id="poster">
-      <!-- 영화디테일 -->
-      <router-link :to="`/movies/${movie.id}`" style="color: black; text-decoration: none">
-        <div class="poster">
-          <div class="image" :style="{ backgroundImage: 'url(' + imageURL + ')' }">
-            <!-- <a :href="`/movies/${movie.id}`"></a> -->
+  <div class="movies col" style="align-content: center;">
+    <div name="movie" >
+      <div id="poster" class="col-lg-2">
+        <router-link :to="`/movies/${movie.id}`">
+          <div class="poster"  style="width: 296px;">
+            <div class="image" :style="{ backgroundImage: 'url(' + imageURL + ')' }"></div>
           </div>
-          <!-- <img class="img-fluid" :src="imageURL" alt="movieImage" > -->
-        </div>
-      </router-link>
+        </router-link>
+      </div>
       <div class="movie-title">
         <p>{{ movie.title }}</p>
       </div>
     </div>
-      
-   
-  </div>
+  </div>  
 </template>
 
 <script>
@@ -50,20 +45,21 @@ export default {
 
 <style>
 #poster {
-  /* background: burlywood; */
   border: 1px solid black;
   margin-bottom: 20px;
 }
 #poster .image {
   width: 100%;
-  height: 330px;
+  height: 350px;
   /* max-height: 100%; */
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center;
-  border: 1px solid black;
 }
 #poster .movie-title {
   margin-top: 5px;
+}
+.movies {
+
 }
 </style>

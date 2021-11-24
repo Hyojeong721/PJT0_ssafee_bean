@@ -1,10 +1,10 @@
 <template>
   <tr>
     <th scope="row">{{review.id}}</th>
-    <td><router-link :to="`/reviews/${review.id}`">{{ review.title }}</router-link></td>
-    <td><router-link :to="`/reviews/${review.id}`">{{ review.user_name }}</router-link></td>
-    <td><router-link :to="`/reviews/${review.id}`">{{ review.created_at | moment('YYYY-MM-DD hh:mm') }}</router-link></td>
-    <td><router-link :to="`/reviews/${review.id}`">{{ likeusersCnt }}</router-link></td>
+    <td><router-link class="non-a" :to="`/reviews/${review.id}`">{{ review.title }}</router-link></td>
+    <td><router-link class="non-a" :to="`/reviews/${review.id}`">{{ review.user_name }}</router-link></td>
+    <td><router-link class="non-a" :to="`/reviews/${review.id}`">{{ likeusersCnt }}</router-link></td>
+    <td><router-link class="non-a" :to="`/reviews/${review.id}`">{{ review.created_at | moment('YYYY-MM-DD')}}</router-link></td>
   </tr>
 </template>
 
@@ -54,5 +54,8 @@ export default {
 </script>
 
 <style>
-
+.non-a {
+  color: white;
+  text-decoration: none;
+}
 </style>
