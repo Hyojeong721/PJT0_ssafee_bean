@@ -14,7 +14,7 @@ export default new Vuex.Store({
     loginUser: '',
     selectedReview: [],
     userInfo: {},
-    userRank: 0,
+    userRank: '',
     likeMovies: [],
     genreName: '',
     genresList: [],
