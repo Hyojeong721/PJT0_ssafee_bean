@@ -20,7 +20,7 @@
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 col-xs-4">
-              <input class="form-control mr-sm-2" type="search" placeholder="영화 검색" v-model="userQuery" @keyup.enter="movieSearch">
+              <input class="form-control mr-sm-2" type="search" placeholder="영화 검색" v-model="userQuery" @keydown.enter="movieSearch">
             </form>
             <button class="btn btn-outline-success my-2 my-sm-0" @click="movieSearch">검색</button>
             <ul v-if="isLogin" class="navbar-nav navbar-right ">

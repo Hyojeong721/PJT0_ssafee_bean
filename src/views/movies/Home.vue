@@ -43,19 +43,34 @@ export default {
         },
       })
     },
+    getGenres: function () {
+      const Django_URL = 'http://127.0.0.1:8000'
+      axios({
+      meethod: 'get',
+      url: `${Django_URL}/movies/genre/`
+      })
+        .then(res => {
+          console.log(res.data)
+          this.$store.dispatch('genresList', res.data)
+        })
+        .cathc(err => {
+          console.log(err)
+        })
+    },
   },
   created: function () {
     axios({
       method: 'get',
       url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=ko-KR`,
     })
-      .then ((res) => {
+      .then((res) => {
         this.movies = res.data.results
         this.slides = this.movies.length
       })
       .catch((err) => {
         console.log(err)
       })
+    this.getGenres()
   },
 }
 </script>

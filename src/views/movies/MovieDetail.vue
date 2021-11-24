@@ -1,5 +1,8 @@
 <template>
   <div id="movie-detail" class="card row">
+    <span v-for="(title, idx) in genres" :key="idx">
+        {{ title }}
+    </span>
     <div class="card-body offset-md-2 col-8">
       <div class="movie-title">
         <span>{{ movie.title }}</span>
@@ -33,6 +36,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
                   </div>
                 </div>
+                
               </div>
             </div>
             <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
@@ -87,6 +91,7 @@ export default {
         movie: 0,
       },
       rankID: 0,
+      genres_name: [],
     };
   },
   methods: {
@@ -214,6 +219,22 @@ export default {
     imageURL: function () {
       const movieImage = this.movie.poster_path
       return `https://image.tmdb.org/t/p/original/${movieImage}`
+    },
+    genres: function () {
+      const genres = this.movie.genres
+      const genresList = this.$store.state.genresList
+      const genresName = this.genres_name
+      console.log(genresName)
+      for (var i= 0; i < genres.length; i ++) {
+        // console.log(genres.length)
+        for (var j= 0; j < genresList.length; j ++) {
+          // console.log(j)
+          if (Object.values(genresList[j]).includes(genres[i])) {
+            genresName.push(genresList[j].name)
+          }
+        }
+      }
+      return genresName
     },
   },
   created: function () {
