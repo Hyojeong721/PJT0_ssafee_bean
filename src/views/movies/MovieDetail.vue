@@ -43,11 +43,12 @@
                     <b-form-rating value="0" disabled></b-form-rating>
                   </div>
                   <button v-if="value" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
+
                   <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h3 class="modal-title" id="exampleModalLabel">평점</h3>
+                          <h3 class="modal-title" id="exampleModalLabel">평점</h3>      
                           <vue-star-rate :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRatingUpdate"></vue-star-rate>
                         </div>
                         <div class="modal-footer">
@@ -106,11 +107,11 @@
             </div>
 
           </div>
-
-        </div>
-
+          
+          <div name="movie-youtube">
             <youtube-video :youtubeVideo="youtubeVideo"></youtube-video>
-
+          </div>
+        </div>
       </div>
     </div>
   </div>

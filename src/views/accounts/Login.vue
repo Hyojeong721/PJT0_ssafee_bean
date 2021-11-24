@@ -1,20 +1,35 @@
 <template>
-  <div>
-    <h1>로그인</h1>
-    <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username" />
+  <div name="login-from" class="container">
+    <div class="login-title">
+      <h1>로그인</h1>
     </div>
-    <div>
-      <label for="password">비밀번호: </label>
-      <input
-        type="password"
-        id="password"
-        v-model="credentials.password"
-        @keyup.enter="login"
-      />
+    <div class="login-body">
+      <div class="login-id col-6">
+        <div class="input-group input-group-lg row mb-3">
+          <label class="input-group-text col-4" for="userid">userID</label>
+          <input type="text" class="form-control" id="userid" v-model="credentials.username">
+        </div>
+      </div>
+      
+      <div name="login-pw" class="col-6">
+        <div class="input-group input-group-lg row mb-3">
+          <label class="input-group-text col-4" for="password">password</label>
+          <input 
+          type="password" 
+          class="form-control" 
+          id="password"
+          v-model="credentials.password"
+          @keyup.enter="login"
+          >
+        </div>
+      </div>
+
+      <div name="login-btn" class="col-6">
+        <button type="button" class="btn btn-primary login-btn" @click="login">로그인</button>
+      </div>
+
     </div>
-    <button @click="login">로그인</button>
+
   </div>
 </template>
 
@@ -61,3 +76,27 @@ export default {
   },
 }
 </script>
+
+<style>
+.login-title {
+  text-align: center;
+  display: block;
+  margin: 2rem;
+}
+.login-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-id {
+  font-weight: bold;
+}
+.login-btn {
+  margin-left: 62px;
+  margin-top: 30px;
+  width: 60%;
+  border-radius: 70px;
+}
+
+</style>
