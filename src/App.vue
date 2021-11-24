@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app" class="app">
     <div id="nav">
       <nav class="navbar fixed-top navbar-expand-md navbar-light" style="background-color: black;">
         <div class="container-fluid">
@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="nav navbar-nav me-auto mb-lg-0">
               <li class="nav-item">
                 <router-link class="nav-link" to='/movies'>영화</router-link> 
               </li>      
@@ -98,17 +98,33 @@ export default {
 
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif, 'Jua', sans-serif; */
+  /* font-family: 'Jua', sans-serif; */
+  font-family: 'NanumBarunGothicYetHangul', 'Nanum Gothic', sans-serif;  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
   padding: 35px;
+  font-size: 20px;
   background-color: black;
+  font-family: 'Jua', sans-serif;
+}
+#nav .navbar-brand{
+  margin-left: 20px;
+}
+/* 눌렀을때 잠깐 보이는 */
+.navbar-light .navbar-toggler {
+    color: red;
+    border-color: rgb(50 226 188);
+
+}
+.navbar-toggler {
+  background-color: saddlebrown;
 }
 
 #nav a {

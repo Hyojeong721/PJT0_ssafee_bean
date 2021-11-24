@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div name="movie" class="m-5" >
-      <div class="row">
+    <div name="movie" class="m-5 container" >
+      <div class="movie-list row">
         <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
         </movie-item>
       </div>
@@ -78,5 +78,9 @@ export default {
 <style>
 #genres {
   background-color: black;
+}
+.movie-list {
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 </style>

@@ -63,7 +63,7 @@
             <comment class="comment" v-for="comment in comments" :key="comment.id" :comment="comment">
               <!-- <div name="comment-user-info" >
                 <span class="img">
-                <div class="mask" :style="{backgroundImage:'url('+commentImageURL+')'}"></div>
+                  <div class="mask" :style="{backgroundImage:'url('+commentImageURL+')'}"></div>
                 </span>
                 <span class="comment-name">{{ comment.username }}</span>
                 <div class="commnet-date">{{ comment.created_at | moment('YY-MM-DD | hh:mm') }}</div>
