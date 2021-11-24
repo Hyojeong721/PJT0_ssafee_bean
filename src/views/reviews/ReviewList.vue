@@ -66,10 +66,25 @@ export default {
           console.log(err)
         })
     },
+    getUsersAvatar: function () {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/accounts/',
+        headers: this.setToken()
+      })
+        .then(res => {
+          console.log(res)
+          this.$store.dispatch('usersAvatar', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   },
   created: function () {
     if (localStorage.getItem('jwt')) {
       this.getReviews()
+      this.getUsersAvatar()
     } else {
       this.$router.push({ name: 'Login' })
     }
