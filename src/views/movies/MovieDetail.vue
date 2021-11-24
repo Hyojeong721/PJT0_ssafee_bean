@@ -14,8 +14,8 @@
         </div>
         <div class="col-6">
           <div name="movie-user-rank">
-            <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
-            <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
+            <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="bean" @ratingSet="myRating"></vue-star-rate>
+            <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRating"></vue-star-rate>
             <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
             <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -59,7 +59,10 @@
           </div>
           
           <p class="card-text">{{ movie.story }}</p>
+          <youtube-video :youtubeVideo="youtubeVideo"></youtube-video>
         </div>
+
+
 
       </div>
     </div>
@@ -67,14 +70,19 @@
 </template>
 
 <script>
+import YoutubeVideo from './YoutubeVideo.vue'
 import axios from 'axios'
 // vue 별점 기능 구현 라이브러리
 import vueStarRate from 'vue-js-star-rating'
 import swal from 'sweetalert'
 
+const API_KEY = 'AIzaSyCHmkc02QIBqLGdUPBCmQ_XHLk1CayQUzs'
+const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+
 export default {
   name: 'MovieDetail',
   components: {
+    YoutubeVideo,
     vueStarRate,
   },
   data: function () {
@@ -89,6 +97,7 @@ export default {
       },
       rankID: 0,
       genres_name: [],
+      youtubeVideo: '',
     };
   },
   methods: {
@@ -211,6 +220,29 @@ export default {
           this.$store.dispatch('userRank', userRank)
         })
     },
+    getYoutubeVideo: function () {
+      const params = {
+        key: API_KEY,
+        part: 'snippet',
+        q: this.movie.title + ' 공식 예고편',
+        type: 'video',
+      }
+
+      axios({
+        method: 'get',
+        url: API_URL,
+        params: params,
+      })
+        .then(res => {
+          console.log(res)
+          const youtubeVideos = res.data.items
+          this.youtubeVideo = youtubeVideos[0]
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
+    },
   },
   computed: {
     imageURL: function () {
@@ -249,6 +281,7 @@ export default {
     }
     this.getUserLikes()
     this.getUserRank()
+    this.getYoutubeVideo()
   },
 }
 </script>
