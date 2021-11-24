@@ -6,7 +6,7 @@
       </div>
       <div name="profile-content" class="row">
         <div class="col-6">
-          <img :src="profileURL" alt="">
+          <img :src="profileURL" alt="" style="width:300px; height:300px;">
           <input type="file" accept="image/*" @change="fileSrc">
         </div>
         <div class="col-6">
@@ -47,6 +47,7 @@
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'Profile',
@@ -67,6 +68,14 @@ export default {
     },
     fileSrc: function (event) {
       this.file = event.target.files[0]
+      var input = event.target; 
+      if (input.files && input.files[0]) { 
+        var reader = new FileReader(); 
+        reader.onload = (e) => {
+          this.profileURL = e.target.result; 
+        } 
+        reader.readAsDataURL(input.files[0]); 
+      }
     },
     getUser: function () {
       const username = this.$store.state.loginUser
@@ -96,7 +105,7 @@ export default {
       if (this.file) {
         formData.append('avatar_thumbnail', this.file)
       } else {
-        formData.append('avatar_thumbnail', this.user.avatar_thumbnail)
+        swal('오류', '프로필 사진을 설정하세요', 'warning')
       }
       formData.append('mbti', this.user.mbti)
       formData.append('mileage', this.user.mileage)
@@ -115,7 +124,7 @@ export default {
       })
         .then(res => {
           console.log(res)
-          this.$router.go()
+          this.getUser()
         })
         .catch(err => {
           console.log(err)

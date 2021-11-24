@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <h1 class="px-5 py-3">현재상영작</h1>
-    <carousel-3d :controls-visible="true" :width="500" :height="700" :border="0" :controls-width="50" :controls-height="60">
+    <carousel-3d v-if="movies" :controls-visible="true" :width="500" :height="700" :border="0" :controls-width="50" :controls-height="60">
       <slide v-for="(slide, i) in slides" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <router-link router-link :to="`/movies/${movies[i].id}`">
@@ -24,7 +24,7 @@ export default {
   name: 'Home',
   data: function () {
     return {
-      movies: [],
+      movies: this.$store.state.nowMovies,
       slides: 20
     }
   },
@@ -53,7 +53,7 @@ export default {
           console.log(res.data)
           this.$store.dispatch('genresList', res.data)
         })
-        .cathc(err => {
+        .catch(err => {
           console.log(err)
         })
     },
@@ -64,8 +64,9 @@ export default {
       url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=ko-KR`,
     })
       .then((res) => {
-        this.movies = res.data.results
-        this.slides = this.movies.length
+        const movies = res.data.results
+        this.slides = movies.length
+        this.$store.dispatch('nowMovies', movies)
       })
       .catch((err) => {
         console.log(err)

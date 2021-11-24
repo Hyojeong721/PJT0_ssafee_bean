@@ -15,6 +15,7 @@
 import MovieItem from '../movies/MovieItem.vue'
 import axios from 'axios'
 import _ from 'lodash'
+import swal from 'sweetalert'
 
 export default {
   name: 'MbtiReco',
@@ -72,6 +73,17 @@ export default {
   },
   created: function () {
     this.getMBTIMovies()
+    if (this.$store.state.userInfo.mbti == '없음') {
+      swal({
+        title: '알림',
+        text: '프로필 페이지에서 MBTI를 설정하세요',
+        icon: 'warning',
+        button: '확인',
+        // onClose() {
+        //   this.$router.push({ name: 'Profile' })
+        // }
+      })
+    }
   },
 }
 </script>
