@@ -17,6 +17,7 @@ export default new Vuex.Store({
     userRank: 0,
     likeMovies: [],
     genreName: '',
+    genresList: [],
     usersAvatar: [],
   },
 
@@ -42,6 +43,8 @@ export default new Vuex.Store({
     GENRE_NAME: function (state, genreName) {
       state.genreName = genreName
     },
+    GENRES_LIST: function (state, genresList) {
+      state.genresList = genresList
     USERS_AVATAR: function (state, usersAvatar) {
       state.usersAvatar = usersAvatar
     },
@@ -53,6 +56,7 @@ export default new Vuex.Store({
 
       axios.get(`${Django_URL}/movies`)
         .then((res) => {
+          console.log(res)
           commit('GET_MOVIES', res)
         })
         .catch((err) => {
@@ -77,6 +81,8 @@ export default new Vuex.Store({
     genreName: function ({ commit }, genreName) {
       commit('GENRE_NAME', genreName)
     },
+    genresList: function ({ commit }, genresList) {
+      commit('GENRES_LIST', genresList)
     usersAvatar: function ({ commit }, usersAvatar) {
       commit('USERS_AVATAR', usersAvatar)
     },

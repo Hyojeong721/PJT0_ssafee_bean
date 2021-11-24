@@ -1,6 +1,9 @@
 <template>
   <div class="card row">
     <div class="card-body offset-md-3 col-6">
+      <span v-for="(title, idx) in genres" :key="idx">
+        {{ title }}
+      </span>
       <h2>{{ movie.title }}</h2>
       <div>
         <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
@@ -70,6 +73,7 @@ export default {
         movie: 0,
       },
       rankID: 0,
+      genres_name: [],
     };
   },
   methods: {
@@ -197,6 +201,22 @@ export default {
     imageURL: function () {
       const movieImage = this.movie.poster_path
       return `https://image.tmdb.org/t/p/original/${movieImage}`
+    },
+    genres: function () {
+      const genres = this.movie.genres
+      const genresList = this.$store.state.genresList
+      const genresName = this.genres_name
+      console.log(genresName)
+      for (var i= 0; i < genres.length; i ++) {
+        // console.log(genres.length)
+        for (var j= 0; j < genresList.length; j ++) {
+          // console.log(j)
+          if (Object.values(genresList[j]).includes(genres[i])) {
+            genresName.push(genresList[j].name)
+          }
+        }
+      }
+      return genresName
     },
   },
   created: function () {
