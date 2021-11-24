@@ -1,21 +1,18 @@
 <template>
-  <div name="movie" class="col-6 col-md-2 col-sm-4" >
+  <div name="movie" class="col-8 col-sm-5 col-md-4 col-lg-2" style="width: 250px; height:400px;">
 
     <div id="poster">
       <!-- 영화디테일 -->
-      <router-link
-        :to="`/movies/${movie.id}`"
-        @click="selectedMovie(movie.id)"
-        style="color: black; text-decoration: none"
-      >
-      </router-link>
-      <div class="poster">
-        <div class="image" :style="{ backgroundImage: 'url(' + imageURL + ')' }">
+      <router-link :to="`/movies/${movie.id}`" style="color: black; text-decoration: none">
+        <div class="poster">
+          <div class="image" :style="{ backgroundImage: 'url(' + imageURL + ')' }">
+            <!-- <a :href="`/movies/${movie.id}`"></a> -->
+          </div>
+          <!-- <img class="img-fluid" :src="imageURL" alt="movieImage" > -->
         </div>
-        <!-- <img class="img-fluid" :src="imageURL" alt="movieImage" > -->
-      </div>
+      </router-link>
       <div class="movie-title">
-        <p>{{movie.title}}</p>
+        <p>{{ movie.title }}</p>
       </div>
     </div>
       
@@ -59,8 +56,8 @@ export default {
 }
 #poster .image {
   width: 100%;
-  height: 200px;
-  max-height: 200px;
+  height: 330px;
+  /* max-height: 100%; */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
