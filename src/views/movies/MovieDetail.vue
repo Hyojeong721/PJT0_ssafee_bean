@@ -30,7 +30,34 @@
                 <span>사용자 평점 </span>
               </div>
               <div class="rank col">
-                콩 들어갈 곳
+                <div name="movie-user-rank">
+                  <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="bean" @ratingSet="myRating"></vue-star-rate>
+                  <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRating"></vue-star-rate>
+                  <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
+                  <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="exampleModalLabel">평점</h3>
+                          <vue-star-rate
+                            :rateRange="0"
+                            :maxIcon="5"
+                            :iconHeight="22"
+                            :iconWidth="22"
+                            :hasCounter="true"
+                            iconShape="star"
+                            @ratingSet="myRatingUpdate"
+                          ></vue-star-rate>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
+                </div>
               </div>
             </div>
           </div>
@@ -80,44 +107,11 @@
 
           </div>
 
-        </div>
-
-          <div name="movie-user-rank">
-            <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="bean" @ratingSet="myRating"></vue-star-rate>
-            <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRating"></vue-star-rate>
-            <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
-            <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">평점</h3>
-                    <vue-star-rate
-                      :rateRange="0"
-                      :maxIcon="5"
-                      :iconHeight="22"
-                      :iconWidth="22"
-                      :hasCounter="true"
-                      iconShape="star"
-                      @ratingSet="myRatingUpdate"
-                    ></vue-star-rate>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-            <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
+          
+          <div name="movie-youtube">
+            <youtube-video :youtubeVideo="youtubeVideo"></youtube-video>
           </div>
-        
-            <!-- <span>{{ likeCount }}</span>명이 좋아합니다. -->
-          <p class="card-text">{{ movie.story }}</p>
-          <youtube-video :youtubeVideo="youtubeVideo"></youtube-video>
         </div>
-
-
-
 
       </div>
     </div>
