@@ -45,6 +45,7 @@ export default new Vuex.Store({
     },
     GENRES_LIST: function (state, genresList) {
       state.genresList = genresList
+    },
     USERS_AVATAR: function (state, usersAvatar) {
       state.usersAvatar = usersAvatar
     },
@@ -83,6 +84,7 @@ export default new Vuex.Store({
     },
     genresList: function ({ commit }, genresList) {
       commit('GENRES_LIST', genresList)
+    },
     usersAvatar: function ({ commit }, usersAvatar) {
       commit('USERS_AVATAR', usersAvatar)
     },

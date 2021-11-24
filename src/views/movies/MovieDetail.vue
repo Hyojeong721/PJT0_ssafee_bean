@@ -1,7 +1,7 @@
 <template>
   <div id="movie-detail" class="card row">
-    <span v-for="(title, idx) in genres" :key="idx">
-        {{ title }}
+    <span v-for="(genre, idx) in genres" :key="idx">
+        {{ gnere }}
     </span>
     <div class="card-body offset-md-2 col-8">
       <div class="movie-title">
@@ -62,9 +62,6 @@
         </div>
 
       </div>
-
-
-      
     </div>
   </div>
 </template>
@@ -263,4 +260,8 @@ export default {
   font-weight: bold;
   font-size: 60px;
 }
+#movie-detail {
+  background-color: rgb(20, 21, 23);
+}
+
 </style>

@@ -98,7 +98,7 @@ export default {
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap'); */
 
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif, 'Jua', sans-serif; */

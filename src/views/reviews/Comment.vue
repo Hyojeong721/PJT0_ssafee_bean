@@ -2,12 +2,12 @@
   <div>
     <div name="comment-user-info" >
       <span class="img">
-      <div class="mask" :style="{backgroundImage:'url('+commentImageURL+')'}"></div>
+        <div class="mask" :style="{backgroundImage:'url('+commentImageURL+')'}"></div>
       </span>
       <span class="comment-name">{{ comment.username }}</span>
       <div class="commnet-date">{{ comment.created_at | moment('YY-MM-DD | hh:mm') }}</div>
     </div>
-    <div class="mt-3">{{ comment.content }}</div>
+    <div class="mt-3 mb-3">{{ comment.content }}</div>
     <div v-if="comment.username == loginUser" class="d-flex justify-content-end mb-2" >
       <button @click="commentDelete(comment.id)">삭제</button>
     </div>
