@@ -1,49 +1,66 @@
 <template>
-  <div class="card row">
-    <div class="card-body offset-md-3 col-6">
-      <h2>{{ movie.title }}</h2>
-      <div>
-        <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
-        <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
-        <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
-        <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">평점</h3>
-                <vue-star-rate
-                  :rateRange="0"
-                  :maxIcon="5"
-                  :iconHeight="22"
-                  :iconWidth="22"
-                  :hasCounter="true"
-                  iconShape="star"
-                  @ratingSet="myRatingUpdate"
-                ></vue-star-rate>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
+  <div id="movie-detail" class="card row">
+    <div class="card-body offset-md-2 col-8">
+      <div class="movie-title">
+        <span>{{ movie.title }}</span>
+      </div>
+      
+      <div name="movie-content" class="row">
+        <div name="movie-image" class="col-6">
+          <img :src="imageURL" alt="movie image" class="card-img-top" />
+        </div>
+        <div class="col-6">
+          <div name="movie-user-rank">
+            <vue-star-rate v-if="rankData.user_rank" :rateRange="rankData.user_rank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
+            <vue-star-rate v-else :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="true" iconShape="star" @ratingSet="myRating"></vue-star-rate>
+            <button v-if="rankData.user_rank" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
+            <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">평점</h3>
+                    <vue-star-rate
+                      :rateRange="0"
+                      :maxIcon="5"
+                      :iconHeight="22"
+                      :iconWidth="22"
+                      :hasCounter="true"
+                      iconShape="star"
+                      @ratingSet="myRatingUpdate"
+                    ></vue-star-rate>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
+                  </div>
+                </div>
               </div>
             </div>
+            <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
           </div>
+        
+          <div name="movie-like">
+            <i
+              v-if="liked"
+              class="fas fa-heart"
+              style="color: red"
+              @click="updateLikes"
+            ></i>
+            <i
+              v-else
+              class="far fa-heart"
+              style="color: black"
+              @click="updateLikes"
+            ></i>
+            <span>{{ likeCount }}</span>명이 좋아합니다.
+          </div>
+          
+          <p class="card-text">{{ movie.story }}</p>
         </div>
-        <button v-if="rankData.user_rank" @click="myRatingDelete">삭제</button>
+
       </div>
-      <i
-        v-if="liked"
-        class="fas fa-heart"
-        style="color: red"
-        @click="updateLikes"
-      ></i>
-      <i
-        v-else
-        class="far fa-heart"
-        style="color: black"
-        @click="updateLikes"
-      ></i>
-      <span>{{ likeCount }}</span>명이 좋아합니다.
-      <img :src="imageURL" alt="movie image" class="card-img-top" />
-      <p class="card-text">{{ movie.story }}</p>
+
+
+      
     </div>
   </div>
 </template>
@@ -219,4 +236,10 @@ export default {
 </script>
 
 <style>
+#movie-detail .movie-title {
+  text-align: center;
+  margin: 1rem;
+  font-weight: bold;
+  font-size: 60px;
+}
 </style>

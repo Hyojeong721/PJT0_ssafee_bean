@@ -1,17 +1,22 @@
 <template>
-  <div name="movie" class="col-3">
-    <div class="card">
-      <!-- 영화디테일 -->
-      <router-link
-        :to="`/movies/${movie.id}`"
-        @click="selectedMovie(movie.id)"
-        style="color: black; text-decoration: none"
-      >
-      
-      <img class="img" :src="imageURL" alt="movieImage">
-      
-      </router-link>
+  <div name="movie" class="col-6 col-md-2 col-sm-4" >
+    <!-- 영화디테일 -->
+    <router-link
+      :to="`/movies/${movie.id}`"
+      @click="selectedMovie(movie.id)"
+      style="color: black; text-decoration: none"
+    >
+    </router-link>
+  
+
+    <div id="poster">
+      <div class="container p-0">
+        <img class="image img-fluid" :src="imageURL" alt="movieImage">
+      </div>
+      <p style="border: 1px solid white">{{movie.title}}</p>
     </div>
+      
+   
   </div>
 </template>
 
@@ -44,16 +49,14 @@ export default {
 </script>
 
 <style>
-.card {
-  margin-top: 30px;
-
-  overflow: hidden;
-  float: left;      
+.container #poster {
+  /* background: burlywood; */
+  border: 2px solid red;
+  margin-bottom: 20px;
 }
-.img {
-  width: 290px;
-  height: 400px;
-  background-color: rgb(0 0 0 / 20%); 
-      
+#poster .image{
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 </style>

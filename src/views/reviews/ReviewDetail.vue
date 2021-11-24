@@ -9,7 +9,7 @@
           </div>
           <div class="status">
             <span class="img">
-              <div class="mask" style="background-image:url()"></div>
+              <div class="mask" style="background-image:url('')"></div>
             </span>
             <span class="name">{{ review[0].user_name }}</span>
             <div class="date">{{ review[0].created_at | moment('YYYY-MM-DD hh:mm') }}</div>
@@ -63,7 +63,7 @@
             <div class="comment" v-for="comment in comments" :key="comment.id">
               <div name="comment-user-info" >
                 <span class="img">
-                <div class="mask" style="background-image:url()"></div>
+                <div class="mask" style="background-image:url('')"></div>
                 </span>
                 <span class="comment-name">{{ comment.username }}</span>
                 <div class="commnet-date">{{ comment.created_at | moment('YY-MM-DD | hh:mm') }}</div>
