@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>"{{ this.$route.query.search_query }}" 검색 결과</h1>
+    <h1 class="m-3">{{this.$route.query.search_query}} 검색 결과</h1>
     <div name="movie" class="m-3">
       <div class="row justify-content-md-center">
         <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
