@@ -17,6 +17,7 @@ export default new Vuex.Store({
     userRank: 0,
     likeMovies: [],
     genreName: '',
+    usersAvatar: [],
   },
 
   mutations: {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     },
     GENRE_NAME: function (state, genreName) {
       state.genreName = genreName
+    },
+    USERS_AVATAR: function (state, usersAvatar) {
+      state.usersAvatar = usersAvatar
     },
   },
 
@@ -72,6 +76,9 @@ export default new Vuex.Store({
     },
     genreName: function ({ commit }, genreName) {
       commit('GENRE_NAME', genreName)
+    },
+    usersAvatar: function ({ commit }, usersAvatar) {
+      commit('USERS_AVATAR', usersAvatar)
     },
   },
   modules: {

@@ -9,7 +9,7 @@
           </div>
           <div class="status">
             <span class="img">
-              <div class="mask" style="background-image:url()"></div>
+              <div class="mask" :style="{backgroundImage:'url('+imageURL+')'}"></div>
             </span>
             <span class="name">{{ review[0].user_name }}</span>
             <div class="date">{{ review[0].created_at | moment('YYYY-MM-DD hh:mm') }}</div>
@@ -60,19 +60,19 @@
         </div>
         <div class="comment-list">
           <div >
-            <div class="comment" v-for="comment in comments" :key="comment.id">
-              <div name="comment-user-info" >
+            <comment class="comment" v-for="comment in comments" :key="comment.id" :comment="comment">
+              <!-- <div name="comment-user-info" >
                 <span class="img">
-                <div class="mask" style="background-image:url()"></div>
+                <div class="mask" :style="{backgroundImage:'url('+commentImageURL+')'}"></div>
                 </span>
                 <span class="comment-name">{{ comment.username }}</span>
                 <div class="commnet-date">{{ comment.created_at | moment('YY-MM-DD | hh:mm') }}</div>
               </div>
               <div class="mt-3">{{ comment.content }}</div>
-              <div class="d-flex justify-content-end mb-2" >
+              <div v-if="comment.username == loginUser" class="d-flex justify-content-end mb-2" >
                 <button @click="commentDelete(comment.id)">삭제</button>
-              </div>
-            </div>
+              </div> -->
+            </comment>
           </div>
         </div>
       </div>
@@ -117,11 +117,17 @@
 
 <script>
 import axios from 'axios'
+import Comment from './Comment.vue'
 
 export default {
   name: 'ReviewDetail',
+  components: {
+    Comment
+  },
   data: function () {
     return {
+      loginUser: this.$store.state.loginUser,
+      usersAvatar: this.$store.state.usersAvatar,
       review: {},
       liked: false,
       likeCount: null,
@@ -135,13 +141,23 @@ export default {
         created_at: '',
         user: '',
         username: '',
+        thumb: '',
       },
     }
   },
   computed: {
     content() { 
       return this.review[0].content.split('\n').join('<br>')
-    }
+    },
+    imageURL() {
+      const review = this.review
+      const revUser = this.usersAvatar.filter(function (user) {
+        if (user.username == review[0].user_name) {
+          return user
+        }
+      })
+      return `http://127.0.0.1:8000${revUser[0].avatar_thumbnail}`
+    },
   },
   methods: {
     setToken: function () {
@@ -258,20 +274,6 @@ export default {
           console.log(err)
         })
     },
-    commentDelete: function (comment_id) {
-      const Django_URL = 'http://127.0.0.1:8000'
-      axios({
-        method: 'delete',
-        url: `${Django_URL}/community/${this.review[0].id}/comments/${comment_id}`,
-        headers: this.setToken()
-      })
-      .then(() => {
-        this.getComments()
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    },
   },
   created: function () {
     const index = this.$route.params.review_id
@@ -285,7 +287,6 @@ export default {
     this.getLikeInfo()
     this.getComments()
   },
-  
 }
 </script>
 
