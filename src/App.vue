@@ -3,18 +3,29 @@
     <div id="nav">
       <nav class="navbar fixed-top navbar-expand-md navbar-light" style="background-color: black;">
         <div class="container-fluid">
-          <router-link class="navbar-brand" to="/">홈</router-link> 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <router-link class="navbar-brand" to="/"><img src="http://127.0.0.1:8000/static/movies/logo.png" alt="logo" style="width: 60px;"></router-link> 
+          <button style="background-color: #603217;" class="navbar-toggler navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="nav navbar-nav me-auto mb-lg-0">
               <li class="nav-item">
                 <router-link class="nav-link" to='/movies'>영화</router-link> 
-              </li>      
-              <li class="nav-item">
-                <router-link class="nav-link"  to='/recommendation'>추천</router-link> 
-              </li>
+              </li>  
+              <li class="nav-item dropdown">
+                <router-link 
+                class="nav-link dropdown-toggle" 
+                id="navbarDarkDropdownMenuLink"
+                role="button" data-bs-toggle="dropdown" 
+                aria-expanded="false" 
+                style="color: white; font-weight: normal;"
+                to=''>추천</router-link>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><router-link class="dropdown-item text" to="/recommendation/genre">장르별</router-link></li>
+                  <li><router-link class="dropdown-item text" to="/recommendation/rank">평점별</router-link></li>
+                  <li><router-link class="dropdown-item text" to="/recommendation/mbti">MBTI</router-link></li>
+                </ul> 
+              </li>     
               <li class="nav-item">
                 <router-link class="nav-link"  to="/reviews">리뷰</router-link> 
               </li>
@@ -25,13 +36,13 @@
             <button class="btn btn-outline-success my-2 my-sm-0" @click="movieSearch">검색</button>
             <ul v-if="isLogin" class="navbar-nav navbar-right ">
               <li class="nav-item">
-                  <router-link class="nav-link" to='/profile/likes'>찜</router-link> 
+                  <router-link class="nav-link" to='/profile/likes'>찜콩</router-link> 
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to='/profile'>프로필</router-link> 
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" @click.native="logout" to="">로그아웃</router-link>
+                <router-link class="nav-link" style="color: white; font-weight: normal;" @click.native="logout" to="">로그아웃</router-link>
               </li>
               <li v-if="this.$store.state.userInfo.id == 1" class="nav-item pt-2">
                 <a href="http://127.0.0.1:8000/admin/">관리자</a>
@@ -117,14 +128,8 @@ html {
 #nav .navbar-brand{
   margin-left: 20px;
 }
-/* 눌렀을때 잠깐 보이는 */
-.navbar-light .navbar-toggler {
-    color: red;
-    border-color: rgb(50 226 188);
-
-}
 .navbar-toggler {
-  background-color: saddlebrown;
+  background-color: #603217;
 }
 
 #nav a {

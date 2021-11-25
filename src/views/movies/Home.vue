@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div>
-        <h2 class="p-4 pt-3">현재 상영작</h2>
+        <h2 class="p-4">현재 상영작</h2>
     </div>
     <carousel-3d v-if="movies" :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
       <slide v-for="(slide, i) in slides" :index="i" :key="i">
@@ -26,7 +26,7 @@ export default {
   name: 'Home',
   data: function () {
     return {
-      movies: this.$store.state.nowMovies,
+      movies: [],
       slides: 20
     }
   },

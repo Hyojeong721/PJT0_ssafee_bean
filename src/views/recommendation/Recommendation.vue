@@ -1,14 +1,20 @@
 <template>
   <div>
-    <div id="reconav">
+    <!-- <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+      <li><router-link class="dropdown-item text" to="/recommendation/genre">장르별</router-link></li>
+      <li><router-link class="dropdown-item text" to="/recommendation/rank">평점별</router-link></li>
+      <li><router-link class="dropdown-item text" to="/recommendation/mbti">MBTI</router-link></li>
+    </ul> 
+   
+     <div id="reconav">
       <router-link class="text" to="/recommendation/genre">장르별</router-link> |
       <router-link class="text" to="/recommendation/rank">평점별</router-link> |
       <router-link class="text" to="/recommendation/mbti">MBTI</router-link>
-    </div>
+    </div> -->
 
-    <div class="">
+    <div>
       <genre-reco></genre-reco>
-    </div>
+    </div> 
 
   </div>
 </template>
@@ -21,7 +27,6 @@ export default {
   name:'Recommendation',
   components:{
     GenreReco,
-   
   },
  
 }
