@@ -1,17 +1,17 @@
 <template>
-  <div id="login-form" class="container body" style="margin-top: 23rem;">
+  <div id="login-form" class="container body" style="margin-top: 15rem;">
     <div class="login-title">
       <h1>로그인</h1>
     </div>
-    <div class="login-body">
-      <div class="login-id col-6">
+    <div class="login-body" style="padding-top: 10px;">
+      <div class="login-id col-5">
         <div class="input-group input-group-lg row mb-3">
           <label class="input-group-text col-4" for="userid">아이디</label>
           <input type="text" class="form-control" id="userid" v-model="credentials.username">
         </div>
       </div>
       
-      <div name="login-pw" class="col-6">
+      <div name="login-pw" class="col-5">
         <div class="input-group input-group-lg row mb-3">
           <label class="input-group-text col-4" for="password">비밀번호</label>
           <input 
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div name="login-btn" class="offset-3 col-6">
+      <div name="login-btn" class="offset-4 col-6">
         <button type="button" class="btn btn-primary login-btn" @click="login">로그인</button>
       </div>
 
@@ -78,9 +78,6 @@ export default {
 </script>
 
 <style>
-#login-form {
-  height: 100vh;
-}
 .login-title {
   text-align: center;
   display: block;
@@ -97,7 +94,7 @@ export default {
 }
 .login-btn {
   margin-top: 30px;
-  width: 47%;
+  width: 30%;
   border-radius: 70px;
 }
 </style>
