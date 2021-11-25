@@ -31,13 +31,16 @@ export default {
   computed: {
     commentImageURL() {
       const comment = this.comment
-      console.log(comment)
       const comUser = this.usersAvatar.filter(function (user) {
         if (user.username == comment.username) {
           return user
         }
       })
-      return `http://127.0.0.1:8000${comUser[0].avatar_thumbnail}`
+      if (comUser[0].avatar_thumbnail) {
+        return `http://127.0.0.1:8000${comUser[0].avatar_thumbnail}`
+      } else {
+        return 'http://127.0.0.1:8000/accounts/avatars/default.jpg'
+      }
     },
   },
   methods: {
