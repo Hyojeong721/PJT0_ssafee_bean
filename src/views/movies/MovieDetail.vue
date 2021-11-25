@@ -110,8 +110,7 @@ import YoutubeVideo from './YoutubeVideo.vue'
 import axios from 'axios'
 import swal from 'sweetalert'
 
-// const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
-const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
+const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 const Django_URL = 'http://127.0.0.1:8000'
