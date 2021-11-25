@@ -6,8 +6,8 @@
     <carousel-3d v-if="movies" :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
       <slide v-for="(slide, i) in slides" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
-          <router-link router-link :to="`/movies/${movies[i].id}`">
-            <img :src="`https://image.tmdb.org/t/p/w500/${movies[i].poster_path}`" alt="" :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >=0)}">
+          <router-link router-link :to="`/movies/${movies.i.id}`">
+            <img :src="`https://image.tmdb.org/t/p/w500/${movies.i.poster_path}`" alt="" :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >=0)}">
           </router-link>
         </template>
       </slide>
@@ -20,7 +20,7 @@ import axios from 'axios'
 // import NowMovieList from './NowMovieList.vue'
 import { Carousel3d, Slide } from 'vue-carousel-3d'
 
-const API_KEY = '65bf23772658c6b898a2865e99430c95'
+const API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
   name: 'Home',
@@ -36,15 +36,6 @@ export default {
     Slide
   },
   methods: {
-    selectedNowMovie: function (now_movie) {
-      console.log(now_movie)
-      this.$router.push({
-        name: "MovieDetail",
-        params: {
-          movie_id: now_movie,
-        },
-      })
-    },
     getGenres: function () {
       const Django_URL = 'http://127.0.0.1:8000'
       axios({
@@ -52,7 +43,7 @@ export default {
       url: `${Django_URL}/movies/genre/`
       })
         .then(res => {
-          console.log(res.data)
+          // console.log(res.data)
           this.$store.dispatch('genresList', res.data)
         })
         .catch(err => {

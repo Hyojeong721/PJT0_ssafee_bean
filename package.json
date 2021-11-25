@@ -19,6 +19,7 @@
     "vue-carousel-3d": "^1.0.1",
     "vue-google-login": "^2.0.5",
     "vue-google-oauth2": "^1.5.8",
+    "vue-infinite-loading": "^2.4.5",
     "vue-js-star-rating": "^1.1.5",
     "vue-lodash": "^2.1.2",
     "vue-moment": "^4.1.0",

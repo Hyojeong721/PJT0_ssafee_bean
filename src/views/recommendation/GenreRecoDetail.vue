@@ -50,6 +50,7 @@ export default {
         headers: this.setToken(),
       })
         .then(res => {
+          console.log(res)
           this.movies = res.data
         })
         .catch(err => {

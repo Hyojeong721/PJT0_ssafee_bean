@@ -49,7 +49,8 @@ export default {
   },
   data: function () {
     return {
-      movies: null,
+      page: 1,
+      movies: [],
     }
   },
   methods: {
@@ -66,7 +67,7 @@ export default {
       if (!genre) {
         this.movies = movies
       }
-    }
+    },
   },
   created: function () {
     this.$store.dispatch('getMovies')

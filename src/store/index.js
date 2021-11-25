@@ -24,7 +24,7 @@ export default new Vuex.Store({
 
   mutations: {
     GET_MOVIES: function (state, data) {
-      state.movies = data.data 
+      state.movies = data.data
     },
     LOGIN_USER: function (state, credentials) {
       state.loginUser = credentials.username
@@ -61,7 +61,6 @@ export default new Vuex.Store({
 
       axios.get(`${Django_URL}/movies`)
         .then((res) => {
-          console.log(res)
           commit('GET_MOVIES', res)
         })
         .catch((err) => {

@@ -21,7 +21,6 @@ export default {
   props: {
     movie: Object,
   },
-
   computed: {
     imageURL: function () {
       const movieImage = this.movie.poster_path;
