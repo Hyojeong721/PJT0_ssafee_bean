@@ -4,7 +4,7 @@
         <h2 class="p-4">현재 상영작</h2>
     </div>
     <div v-if="movies[0].id">
-      <carousel-3d :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
+      <carousel-3d :controls-visible="true" :width="400" :height="550" :border="0" :display="7" :inverseScaling="100">
         <slide v-for="(slide, i) in slides" :index="i" :key="i">
           <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
             <router-link :to="`/movies/${movies[i].id}`">
@@ -79,5 +79,8 @@ export default {
   height: 600px;
   margin: 0px;
   background-color: rgb(20, 21, 23);
+}
+.next[data-v-05517ad0], .prev[data-v-05517ad0] {
+  color: #fff;
 }
 </style>

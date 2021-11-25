@@ -174,6 +174,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+          swal('오류', '찜콩하려면 로그인하세요.', 'error')
         })
     },
     myRating: function () {

@@ -1,5 +1,5 @@
 <template>
-  <div name="signup">
+  <div name="signup" style="margin-top: 23rem;">
     <div class="signup-title">
       <h1>회원가입</h1>
     </div>
@@ -34,14 +34,12 @@
         </div>
       </div>
 
-      <div name="login-btn" class="col-6">
+      <div name="login-btn" class="offset-4 col-6">
         <button type="button" class="btn btn-primary signup-btn" @click="signup">회원가입</button>
       </div>
 
     </div>
   </div>
-
-
 
 </template>
 
@@ -63,6 +61,7 @@ export default {
   },
   methods: {
     signup: function () {
+      
       const Django_URL = 'http://127.0.0.1:8000'
       axios({
         method: 'post',
@@ -73,7 +72,11 @@ export default {
           this.$router.push({ name: 'Login'})
         })
         .catch(err => {
-          swal('오류', err.response.data.error, 'error')
+          if (!this.credentials.username) {
+            swal('오류', '아이디를 입력하세요.', 'error')
+          } else {
+            swal('오류', err.response.data.error, 'error')
+          }
         })
     }
   }
@@ -87,6 +90,7 @@ export default {
   margin: 2rem;
 }
 .signup-body {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -98,7 +102,7 @@ export default {
 .signup-btn {
   margin-left: 62px;
   margin-top: 30px;
-  width: 60%;
+  width: 23%;
   border-radius: 70px;
 }
 </style>
