@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app">
+  <div id="app" class="app body">
     <div id="nav">
       <nav class="navbar fixed-top navbar-expand-md navbar-light" style="background-color: black;">
         <div class="container-fluid">
@@ -24,30 +24,26 @@
             </form>
             <button class="btn btn-outline-success my-2 my-sm-0" @click="movieSearch">검색</button>
             <ul v-if="isLogin" class="navbar-nav navbar-right ">
-              <!-- <span v-if="isLogin"> -->
-                <li class="nav-item">
-                    <router-link class="nav-link" to='/profile/likes'>찜</router-link> 
-                </li>
-                <li class="nav-item">
-                  <router-link class="nav-link" to='/profile'>프로필</router-link> 
-                </li>
-                <li class="nav-item">
-                  <router-link class="nav-link" @click.native="logout" to="#">로그아웃</router-link>
-                </li>
-                <li v-if="this.$store.state.userInfo.id == 1" class="nav-item pt-2">
-                  <a href="http://127.0.0.1:8000/admin/">관리자</a>
-                </li>
-              <!-- </span> -->
+              <li class="nav-item">
+                  <router-link class="nav-link" to='/profile/likes'>찜</router-link> 
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to='/profile'>프로필</router-link> 
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" @click.native="logout" to="#">로그아웃</router-link>
+              </li>
+              <li v-if="this.$store.state.userInfo.id == 1" class="nav-item pt-2">
+                <a href="http://127.0.0.1:8000/admin/">관리자</a>
+              </li>
             </ul>
             <ul v-else class="navbar-nav navbar-right ">
-            <!-- <span v-else> -->
               <li class="nav-item">
                 <router-link class="nav-link" to="/signup">회원가입</router-link> 
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/login">로그인</router-link>
               </li>
-            <!-- </span> -->
             </ul>
           </div>
         </div>
@@ -98,13 +94,18 @@ export default {
 
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap');
+html {
+  background-color:rgb(20, 21, 23) ;
+}
 
-#app {
+.app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif, 'Jua', sans-serif; */
   font-family: 'Jua', sans-serif;
   font-family: 'Nanum Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: white;
 }
 
 #nav {
@@ -130,21 +131,16 @@ export default {
   text-decoration: none;
   color: white;
 }
-
 #nav a.router-link-exact-active {
   font-weight: bold;
   color: red;
 }
-
 li {
   float: left;
   margin-left: 5px;
 }
-
-body {
+.body {
   background-color: rgb(20, 21, 23);
-  color: white;
+  color : white;
 }
-
-
 </style>

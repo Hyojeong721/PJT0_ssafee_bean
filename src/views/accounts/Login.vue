@@ -1,5 +1,5 @@
 <template>
-  <div name="login-from" class="container">
+  <div id="login-form" class="container body">
     <div class="login-title">
       <h1>로그인</h1>
     </div>
@@ -78,6 +78,9 @@ export default {
 </script>
 
 <style>
+#login-form {
+  height: 100vh;
+}
 .login-title {
   text-align: center;
   display: block;
@@ -93,10 +96,8 @@ export default {
   font-weight: bold;
 }
 .login-btn {
-  margin-left: 62px;
   margin-top: 30px;
   width: 60%;
   border-radius: 70px;
 }
-
 </style>

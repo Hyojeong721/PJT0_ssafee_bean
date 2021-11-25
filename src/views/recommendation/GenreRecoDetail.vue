@@ -1,7 +1,9 @@
 <template>
-  <div class="m-3">
+  <div id="selected-genre">
     <div class="row justify-content-md-center">
-      <h2>{{ genreName }} 장르 영화들</h2>
+      <div>
+        <h2 class="m-4">{{ genreName }} 장르 영화들</h2>
+      </div>
       <div class="row">
         <movie-item
         v-for="movie in movies"

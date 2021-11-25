@@ -1,20 +1,17 @@
 <template>
-  <div id="reviewtable" style="color: white; text-decoration: none;">
-    <div class="m-3">
-      <h1>영화 리뷰</h1>
+  <div id="reviewtable">
+    <div>
+      <h2 class="m-4">리뷰 게시판</h2>
     </div>
-    <div align="right" class="btnsytle py-3">
-      <router-link id="reviewcreate" class="btn" to="/reviews/create">리뷰 작성</router-link>
-    </div>
-    <div class="tablesytle">
+    <div class="table-sytle">
       <table class="table table-dark table-hover table-bordered">
         <thead>
           <tr class="col">
             <th scope="col">게시번호</th>
             <th scope="col">제목</th>
             <th scope="col">글쓴이</th>
-            <th scope="col">작성일</th>
             <th scope="col">좋아요 수</th>
+            <th scope="col">작성일</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +24,27 @@
         </tbody>  
       </table>
     </div>
+
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div name="create-btn" align="right" class="btnsytle pb-1">
+      <router-link id="review-create" class="btn" to="/reviews/create">리뷰 작성</router-link>
+    </div>
+
   </div>
 </template>
 
@@ -92,21 +110,19 @@ export default {
 }
 </script>
 
-<style>
-#reviewcreate {
-  background-color: thistle;
-  color: yellow;
-}
-#reviewtable {
-  margin: 30px;
-}
-a {
+<style scoped>
+#review-create {
+  background-color: #603217;
+  border: 1px solid rgb(31,32,35);
   color: white;
-  text-decoration: none;
+  font-weight: 500;
 }
 thead {
   color: white;
   font-size: 20px;
+}
+.table {
+  background-color: rgb(31, 32, 35);
 }
 .btnsytle {
   width: 65%;
@@ -114,7 +130,7 @@ thead {
   left: 50%;
   transform: translateX(-50%);
 }
-.tablesytle {
+.table-sytle {
   width: 65%;
   position: absolute;
   left: 50%;
