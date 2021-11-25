@@ -60,19 +60,7 @@
         </div>
         <div class="comment-list">
           <div >
-            <comment class="comment" v-for="comment in comments" :key="comment.id" :comment="comment">
-              <!-- <div name="comment-user-info" >
-                <span class="img">
-                  <div class="mask" :style="{backgroundImage:'url('+commentImageURL+')'}"></div>
-                </span>
-                <span class="comment-name">{{ comment.username }}</span>
-                <div class="commnet-date">{{ comment.created_at | moment('YY-MM-DD | hh:mm') }}</div>
-              </div>
-              <div class="mt-3">{{ comment.content }}</div>
-              <div v-if="comment.username == loginUser" class="d-flex justify-content-end mb-2" >
-                <button @click="commentDelete(comment.id)">삭제</button>
-              </div> -->
-            </comment>
+            <comment class="comment" v-for="comment in comments" :key="comment.id" :comment="comment">            </comment>
           </div>
         </div>
       </div>
@@ -241,7 +229,7 @@ export default {
         })
     },
     getComments: function () {
-      const Django_URL = 'http://127.0.0.1:8000'
+      const Django_URL = 'http://127.0.0.1:8000'      
       axios({
         method: 'get',
         url: `${Django_URL}/community/${this.review[0].id}/comments/`,
@@ -256,7 +244,6 @@ export default {
     },
     commentCreate: function () {
       this.userComment.created_at = new Date()
-      console.log(this.userComment.created_at)
       this.userComment.user = this.$store.state.userInfo.id
       this.userComment.username = this.$store.state.userInfo.username
       const Django_URL = 'http://127.0.0.1:8000'
