@@ -20,7 +20,7 @@
                 aria-expanded="false" 
                 style="color: white; font-weight: normal;"
                 to=''>추천</router-link>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <ul class="dropdown-menu dropdown-menu-dark" style="min-width: 5rem;" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li><router-link class="dropdown-item text" to="/recommendation/genre">장르별</router-link></li>
                   <li><router-link class="dropdown-item text" to="/recommendation/rank">평점별</router-link></li>
                   <li><router-link class="dropdown-item text" to="/recommendation/mbti">MBTI</router-link></li>
@@ -148,7 +148,7 @@ li {
   background-color: rgb(20, 21, 23);
   color : white;
 }
-.dropdown-menu {
+/* .dropdown-menu {
   min-width: 5rem;
-}
+} */
 </style>
