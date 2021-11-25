@@ -1,19 +1,19 @@
 <template>
-  <div name="signup" style="margin-top: 23rem;">
+  <div name="signup" style="margin-top: 15rem;">
     <div class="signup-title">
       <h1>회원가입</h1>
     </div>
 
-    <div class="signup-body">
-      <div class="signup-id col-6">
-        <div class="input-group input-group-lg row mb-3">
+    <div class="signup-body" style="padding-top: 10px;">
+      <div class="signup-id col-3">
+        <div class="input-group input-group-lg row mb-3" style="margin: 0 auto;">
           <label class="input-group-text col-4" for="userid">아이디</label>
           <input type="text" class="form-control" id="userid" v-model="credentials.username">
         </div>
       </div>
 
-      <div name="signup-pw" class="col-6">
-        <div class="input-group input-group-lg row mb-3">
+      <div name="signup-pw" class="col-3">
+        <div class="input-group input-group-lg row mb-3" style="margin: 0 auto;">
           <label class="input-group-text col-4" for="password">비밀번호</label>
           <input 
           type="password" 
@@ -22,7 +22,7 @@
           v-model="credentials.password"
           >
         </div>
-        <div class="input-group input-group-lg row mb-3">
+        <div class="input-group input-group-lg row mb-3" style="margin: 0 auto;">
           <label class="input-group-text col-4" for="password">비밀번호 확인 </label>
           <input 
             type="password" 
@@ -90,7 +90,7 @@ export default {
   margin: 2rem;
 }
 .signup-body {
-  margin: 0 auto;
+  margin: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
