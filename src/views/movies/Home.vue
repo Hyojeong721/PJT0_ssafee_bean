@@ -75,7 +75,9 @@ export default {
 </script>
 
 <style>
-#home {
-  background-color: black;
+.carousel {
+  height: 600px;
+  margin: 0px;
+  background-color: rgb(20, 21, 23);
 }
 </style>

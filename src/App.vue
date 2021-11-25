@@ -148,4 +148,7 @@ li {
   background-color: rgb(20, 21, 23);
   color : white;
 }
+.dropdown-menu {
+  min-width: 5rem;
+}
 </style>
