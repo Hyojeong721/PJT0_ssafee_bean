@@ -3,8 +3,8 @@
     <div>
       <h2 class="m-4">리뷰 게시판</h2>
     </div>
-    <div class="table-sytle">
-      <table class="table table-dark table-hover table-bordered" id="review-table">
+    <div class="table-sytle" style="margin-top: 50px;">
+      <!-- <table class="table table-dark table-hover table-bordered" id="review-table">
         <thead>
           <tr class="col">
             <th scope="col">게시번호</th>
@@ -22,24 +22,34 @@
           >
           </review-item>
         </tbody>  
-      </table>
-    </div>
+      </table> -->
+      <b-table
+        id="review-table"
+        dark hover bordered
+        :items="reviews"
+        :per-page="perPage"
+        :current-page="currentPage"
+        :fields="fields"
+      >
+        <template #cell(id)="data">
+          <router-link class="non-a" :to="`/reviews/${data.item.id}`">{{ data.value }}</router-link>
+        </template>
+        <template #cell(title)="data">
+          <router-link class="non-a" :to="`/reviews/${data.item.id}`">{{ data.value }}</router-link>
+        </template>
+        <template #cell(created_at)="data">
+          {{ data | moment('YYYY-MM-DD') }}
+        </template>
+      </b-table>
 
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="review-table"
+        align="center"
+      ></b-pagination>
+    </div>
 
     <div name="create-btn" align="right" class="btnsytle pb-1">
       <router-link id="review-create" class="btn" to="/reviews/create">리뷰 작성</router-link>
@@ -49,16 +59,47 @@
 </template>
 
 <script>
-import ReviewItem from './ReviewItem.vue'
+// import ReviewItem from './ReviewItem.vue'
 import axios from 'axios'
 export default {
   name: 'ReviewList',
   components: {
-    ReviewItem,
+    // ReviewItem,
   },
   data: function () {
     return {
       reviews: [],
+      perPage: 10,
+      currentPage: 1,
+      fields: [
+        {
+          key: 'id',
+          label: '게시번호',
+        },
+        {
+          key: 'title',
+          label: '제목',
+        },
+        {
+          key: 'user_name',
+          label: '글쓴이',
+        },
+        {
+          key: 'like_user_count',
+          label: '좋아요 수',
+          sortable: true,
+        },
+        {
+          key: 'created_at',
+          label: '작성일',
+          sortable: true,
+        },
+      ],
+    }
+  },
+  computed: {
+    rows() {
+      return this.reviews.length
     }
   },
   methods: {
@@ -135,5 +176,9 @@ thead {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+.non-a {
+  color: white;
+  text-decoration: none;
 }
 </style>

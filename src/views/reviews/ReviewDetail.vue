@@ -1,6 +1,6 @@
 <template>
-  <div id="reviewdetailtext">
-    <div name="page" class="tablesytle">
+  <div id="reviewdetailtext" class="container">
+    <div name="page" class="tablestyle">
       <div name="board-top" class="board-wrap">
         <div class="detail-head">
           <div class="line-set">
@@ -26,7 +26,7 @@
               <sapn style="cursor: pointer;" v-if="this.$store.state.userInfo.id == review[0].user" @click="deleteReview">삭제</sapn>
             </div>
           </div>
-          <div v-html="content"></div>
+          <div class="mb-4" v-html="content"></div>
         </div>
       </div>
       <div name="like" class="detail-util">
@@ -293,18 +293,15 @@ export default {
 <style>
 #reviewdetailtext {
   color: white;
+  padding: 2rem;
 }
 #modalpage {
   color: black;
 }
+
 .board-wrap .detail-head {
     position: relative;
-    padding: 15px 0 20px;
-}
-.board-wrap .detail-head {
-    position: relative;
-    border-top: 1px solid #24282b;
-    border-bottom: 1px solid #e3e7eb;
+    border-bottom: 6px solid #603217;
     padding: 40px 20px 20px;
 }
 .board-wrap .detail-head .text-group {

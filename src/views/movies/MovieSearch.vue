@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1 class="m-3"><strong>"{{this.$route.query.search_query}}"</strong> 검색 결과</h1>
-    <div name="movie" class="m-3">
+    <div name="movie" class="m-4">
       <div v-if="movies" class="row justify-content-md-center">
         <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
         </movie-item>
       </div>
-      <div v-else class="row justify-content-md-center">
-        <h3><strong>"{{this.$route.query.search_query}}"</strong>와(과) 일치하는 검색결과가 없습니다.</h3>
+      <div v-else class="m-5 container">
+        <h3 class="center"><strong>"{{this.$route.query.search_query}}"</strong>와(과) 일치하는 검색결과가 없습니다.</h3>
       </div>
     </div>
   </div>
@@ -62,5 +62,9 @@ export default {
 </script>
 
 <style>
-
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

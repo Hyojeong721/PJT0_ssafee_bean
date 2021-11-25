@@ -3,17 +3,15 @@
     <div>
         <h2 class="p-4">현재 상영작</h2>
     </div>
-    <div>
-      <carousel-3d v-if="movies" :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
-        <slide v-for="(slide, index) in slides" :index="index" :key="index">
-          <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
-            <router-link :to="`/movies/${movies[i].id}`">
-              <img :src="`https://image.tmdb.org/t/p/w500/${movies[i].poster_path}`" alt="" :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >=0)}">
-            </router-link>
-          </template>
-        </slide>
-      </carousel-3d>
-    </div>
+    <carousel-3d v-if="movies" :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
+      <slide v-for="(slide, i) in slides" :index="i" :key="i">
+        <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
+          <router-link :to="`/movies/${movies[i].id}`">
+            <img :src="`https://image.tmdb.org/t/p/w500/${movies[i].poster_path}`" alt="" :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >=0)}">
+          </router-link>
+        </template>
+      </slide>
+    </carousel-3d>
   </div>
 </template>
 
