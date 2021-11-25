@@ -31,7 +31,7 @@
                 <router-link class="nav-link" to='/profile'>프로필</router-link> 
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" @click.native="logout" to="#">로그아웃</router-link>
+                <router-link class="nav-link" @click.native="logout" to="">로그아웃</router-link>
               </li>
               <li v-if="this.$store.state.userInfo.id == 1" class="nav-item pt-2">
                 <a href="http://127.0.0.1:8000/admin/">관리자</a>
@@ -68,8 +68,8 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       localStorage.removeItem('vuex')
-      this.$router.push({ name: 'Home' })
-      // this.$router.go()
+      // this.$router.push({ name: 'Home' })
+      this.$router.go()
     },
     movieSearch: function () {
       this.$router.push({

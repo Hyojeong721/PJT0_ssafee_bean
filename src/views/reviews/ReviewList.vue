@@ -4,7 +4,7 @@
       <h2 class="m-4">리뷰 게시판</h2>
     </div>
     <div class="table-sytle">
-      <table class="table table-dark table-hover table-bordered">
+      <table class="table table-dark table-hover table-bordered" id="review-table">
         <thead>
           <tr class="col">
             <th scope="col">게시번호</th>
