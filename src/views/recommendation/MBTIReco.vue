@@ -2,7 +2,8 @@
   <div name="mbti-reco">
     <div class="title-nav row">
       <div id="mbti-reco-title" class="col-4">
-        <h2 class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h2 v-if="this.$store.state.loginUser" class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h2 v-else class="row m-0 pt-4 p-4 pb-0">비회원님</h2>
         <h4 class="row m-0 p-4 pt-3">MBTI 기준 추천</h4>
       </div>
       <div name="mbti-reco-mbti" class="col-4 center-center">
@@ -10,7 +11,7 @@
       </div>
     </div>
 
-    <div name="mbti-reco-movie-list">
+    <div v-if="this.$store.state.loginUser" name="mbti-reco-movie-list">
       <div id="mbti-list" class="m-5 mb-2 container mx-auto" >
         <div id="mbti-movie" class="movie-list row">
           <movie-item v-for="movie in movies" :key="movie.id" :movie="movie"></movie-item>
@@ -19,6 +20,10 @@
       <div id="mbti-btn" class="row offset-4 col-4">
         <button @click="getMBTIMovies">다시 추천</button>
       </div>
+    </div>
+    <div v-else class="m-5 container">
+      <h3 class="center">MBTI 기준 추천을 받으려면 로그인을 하세요.</h3>
+      <router-link class="center" to="/login">로그인하러 가기</router-link>
     </div>
   </div>
 </template>
@@ -115,5 +120,10 @@ export default {
 }
 #mbti-list #mbti-movie {
   justify-content: center;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

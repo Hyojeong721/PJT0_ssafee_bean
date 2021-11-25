@@ -1,8 +1,8 @@
 <template>
   <div id="selected-genre">
     <div class="row justify-content-md-center">
-      <div>
-        <h2 class="m-4">{{ genreName }} 장르 영화들</h2>
+      <div v-if="genreName">
+        <h2 class="m-4"><span style="font-size: 20px;"><router-link style="text-decoration: none; color: gray;" to='/movies'>영화 > </router-link></span>{{ genreName }} 영화</h2>
       </div>
       <div class="row">
         <movie-item
@@ -27,7 +27,7 @@ export default {
   data: function () {
     return {
       movies: null,
-      genreName: this.$store.state.genreName,
+      genreName: '',
     }
   },
   components:{
@@ -43,15 +43,20 @@ export default {
     },
     getGenreMovies: function () {
       const genre = this.$route.params.genre_id
+      const selectedGenre = this.$store.state.genresList.filter ((gen) => {
+        if (genre == gen.id) {
+          return gen
+        }
+      })
+      this.genreName = selectedGenre[0].name
       const Django_URL = 'http://127.0.0.1:8000'
       axios({
         method: 'get',
-        url: `${Django_URL}/movies/recommendation/genre/${genre}/`,
-        headers: this.setToken(),
+        url: `${Django_URL}/movies/genre/${genre}/`,
       })
         .then(res => {
           console.log(res)
-          this.movies = res.data
+          this.movies = res.data 
         })
         .catch(err => {
           console.log(err)

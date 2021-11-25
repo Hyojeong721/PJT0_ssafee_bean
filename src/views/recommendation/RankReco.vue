@@ -2,22 +2,26 @@
   <div id="rank-reco">
     <div class="title-nav row">
       <div id="rank-reco-title" class="col-4">
-        <h2 class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h2 v-if="this.$store.state.loginUser" class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h2 v-else class="row m-0 pt-4 p-4 pb-0">비회원님</h2>
         <h4 class="row m-0 p-4 pt-3">평점 기준 추천</h4>
       </div>
     </div>
 
-    <div name="rank-reco-main">
+    <div v-if="this.$store.state.loginUser" name="rank-reco-main">
       <div id="rank-reco-movie" class="m-4 mb-2 container mx-auto" >
         <div id="rank-movie" class="movie-list row">
           <movie-item v-for="movie in myBestMovie" :key="movie.id" :movie="movie"></movie-item>
         </div>
       </div>
       <div id="rank-btn" class="row offset-5 col-1">
-        <button @click="rankReco">다시 추천</button>
+        <button @click="rankReco">관련 영화 더보기</button>
       </div>
     </div>
-
+    <div v-else class="m-5 container">
+      <h3 class="center">평점 기준 추천을 받으려면 로그인을 하세요.</h3>
+      <router-link class="center" to="/login">로그인하러 가기</router-link>
+    </div>
     <!-- <div id="rank-reco-main">
       <div class="mt-5 center-center">
         <div name="rank-reco-main-movie">
@@ -106,5 +110,11 @@ export default {
 
 #rank-reco-movie #rank-movie {
   justify-content: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
