@@ -328,7 +328,7 @@ export default {
 </script>
 
 <style>
-  #movie-detail {
+#movie-detail {
     background-color: rgb(20, 21, 23);
   }
 #movie-detail .movie-title {

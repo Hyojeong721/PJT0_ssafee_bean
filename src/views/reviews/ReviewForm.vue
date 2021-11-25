@@ -1,10 +1,11 @@
 <template>
-  <div class="container" id=text>
-    <div class="my-5 ">
-      <h1>리뷰 작성</h1>
+  <div name="review-create">
+    <div>
+      <h2 class="m-4">리뷰 게시판</h2>
     </div>
-    <div id="reviewcreatetable">
-      <div class="m-3"> 
+    <div id="review-create-table" class="container">
+
+      <div class="row offset-2 col-6 m-3"> 
         <div class="my-2">
           <label for="title" class="form-label m-3" ><h3>제목</h3></label>
           <input id="title" type="text" class="form-control" v-model="title"  placeholder="제목을 입력하세요">
@@ -99,10 +100,7 @@ export default {
 </script>
 
 <style>
-#text {
-  color: white;
-}
-#reviewcreatetable {
+#review-create-table {
   border: 2px solid white;
 }
 textarea.form-control {

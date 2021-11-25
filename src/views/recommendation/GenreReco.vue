@@ -1,13 +1,17 @@
 <template>
-  <div id="genreReco">
-    <!-- <div id="reconav">
-      <router-link class="text" to="/recommendation/genre">장르별</router-link> |
-      <router-link class="text" to="/recommendation/rank">평점별</router-link> |
-      <router-link class="text" to="/recommendation/mbti">MBTI</router-link>   
-    </div> -->
+  <div id="genre-reco">
+    <div class="title-nav row">
+      <div id="mbti-reco-title" class="col-4">
+        <h2 class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h4 class="row m-0 p-4 pt-3">장르 기준 추천</h4>
+      </div>
+      <div name="genre-reco-mbti" class="col-4 center-center">
+        <h1 style="font-weight: bold;">장르를 선택하세요.</h1>
+      </div>
+    </div>
+
     <div class="row" style="text-align: center;">
-      <h3 class="p-5">원하는 장르를 선택하세요.</h3>
-      <div id="genreli" class="mt-3" style="width:810px; float:left; margin:0 auto;">
+      <div id="genreli" class="mt-5" style="width:810px; margin:0 auto;">
         <li class="genreli">
           <span @click="onGenre(28, '액션')">액션</span>
         </li>
@@ -96,7 +100,6 @@ export default {
 
 <style>
 #genreReco {
-  background-color: black;
   color: white;
  
 }

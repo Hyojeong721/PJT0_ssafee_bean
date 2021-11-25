@@ -8,8 +8,6 @@
 
     <div class="">
       <genre-reco></genre-reco>
-      <rank-reco></rank-reco>
-      <mbti-reco></mbti-reco>
     </div>
 
   </div>
@@ -17,15 +15,13 @@
 
 <script>
 import GenreReco from './GenreReco.vue'
-import RankReco from './RankReco.vue'
-import MbtiReco from './MbtiReco.vue'
+
 
 export default {
   name:'Recommendation',
   components:{
     GenreReco,
-    RankReco,
-    MbtiReco,
+   
   },
  
 }

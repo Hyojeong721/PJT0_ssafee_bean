@@ -2,7 +2,7 @@
   <div id="genres">
     <div  class="row justify-content-start">
       <div>
-        <h2 class="m-4" style="color:white">장르를 선택하세요</h2>
+        <h2 class="m-4">장르를 선택하세요</h2>
       </div>
       <div class="offset-md-1 col-2">
         <select style="width:220px; height:40px; " @change="onGenre" name="selectgenres">
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div name="movie" class="m-5 container" >
-      <div class="movie-list row">
+    <div name="movie" class="m-5 container mx-auto" >
+      <div id="movie-list" class="movie-list row">
         <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
         </movie-item>
       </div>
@@ -77,11 +77,9 @@ export default {
 </script>
 
 <style>
-#genres {
-  background-color: black;
-}
 .movie-list {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 </style>

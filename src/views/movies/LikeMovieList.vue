@@ -1,9 +1,11 @@
 <template>
-  <div class="m-3">
-    <div class="row justify-content-md-center">
-      <h2>찜</h2>
-        <movie-item v-for="movie in likeMovies" :key="movie.id" :movie="movie">
-        </movie-item>
+  <div name="like-movie-list" class="m-3">
+    <div>
+      <h2 class="p-4 pt-3">찜콩 ❤</h2>
+    </div>
+    <div class="movie-list row">
+      <movie-item v-for="movie in likeMovies" :key="movie.id" :movie="movie">
+      </movie-item>
     </div>
   </div>
 </template>
