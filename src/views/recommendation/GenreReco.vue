@@ -2,7 +2,8 @@
   <div id="genre-reco">
     <div class="title-nav row">
       <div id="mbti-reco-title" class="col-4">
-        <h2 class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h2 v-if="this.$store.state.loginUser" class="row m-0 pt-4 p-4 pb-0">{{ this.$store.state.loginUser }}님</h2>
+        <h2 v-else class="row m-0 pt-4 p-4 pb-0">비회원님</h2>
         <h4 class="row m-0 p-4 pt-3">장르 기준 추천</h4>
       </div>
       <div name="genre-reco-mbti" class="col-4 center-center">

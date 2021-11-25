@@ -149,6 +149,18 @@ export default {
       }
       return config;
     },
+    getLikeMovies: function () {
+      this.$store.dispatch('getMovies')
+      const movies = this.$store.state.movies
+      const likeMovies = movies.filter((movie) => {
+        const userID = this.$store.state.userInfo.id
+        if (movie.like_users.includes(userID)) {
+          return movie
+        }
+      })
+      this.movies = likeMovies
+      this.$store.dispatch('likeMovies', likeMovies)
+    },
     updateLikes: function () {
       axios({
         method: 'post',
@@ -159,6 +171,7 @@ export default {
           const { liked, likeCount } = res.data
           this.liked = liked;
           this.likeCount = likeCount;
+          this.getLikeMovies()
         })
         .catch((err) => {
           console.log(err)

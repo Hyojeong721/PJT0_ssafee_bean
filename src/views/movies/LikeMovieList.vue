@@ -3,8 +3,8 @@
     <div>
       <h2 class="p-4 pt-3">찜콩 ❤</h2>
     </div>
-    <div class="movie-list row">
-      <movie-item v-for="movie in likeMovies" :key="movie.id" :movie="movie">
+    <div class="movie-list row" v-if="this.$store.state.likeMovies">
+      <movie-item v-for="movie in movies" :key="movie.id" :movie="movie">
       </movie-item>
     </div>
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   data: function () {
     return {
-      movies: this.$store.state.likeMovies,
+      movies: [],
     }
   },
   methods: {
@@ -40,12 +40,12 @@ export default {
   created: function () {
     this.getLikeMovies()
   },
-  computed: {
-    likeMovies: function () {
-      const movies = this.$store.state.likeMovies
-      return movies
-    },
-  },
+  // computed: {
+  //   likeMovies: function () {
+  //     const movies = this.$store.state.likeMovies
+  //     return movies
+  //   },
+  // },
 }
 </script>
 
