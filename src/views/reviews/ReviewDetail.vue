@@ -30,18 +30,16 @@
         </div>
       </div>
       <div name="like" class="detail-util">
-        <button type="button" class="btn btn-md btn-favor">
+        <button type="button" class="btn btn-md btn-favor" @click="updateLikes">
           <i
           v-if="liked"
           class="fas fa-heart"
           style="color: red "
-          @click="updateLikes"
           ></i>
           <i
             v-else
             class="far fa-heart"
             style="color: white"
-            @click="updateLikes"
           ></i>
           좋아요
         </button>  
@@ -93,8 +91,8 @@
               </div>
             </div>  
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  @click="updateReview" >Save changes</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  @click="updateReview" >저장</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >닫기</button>
             </div>
           </div>
         </div>

@@ -114,6 +114,7 @@ import swal from 'sweetalert'
 // const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
 // const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
+
 const Django_URL = 'http://127.0.0.1:8000'
 
 export default {
@@ -175,6 +176,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+          swal('오류', '찜콩하려면 로그인하세요.', 'error')
         })
     },
     myRating: function () {
