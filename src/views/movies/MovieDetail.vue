@@ -32,32 +32,30 @@
               <div class="rank col">
                 <div name="movie-user-rank">
                   <div v-if="value && this.$store.state.loginUser">
-                    <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill"></b-form-rating>
-                    <!-- <vue-star-rate :rateRange="this.$store.state.userRank" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRating"></vue-star-rate> -->
+                    <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border readonly style="background-color: rgb(20, 21, 23);"></b-form-rating>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
                   </div>
                   <div v-else-if="!value && this.$store.state.loginUser">
-                    <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill"></b-form-rating>
-                    <!-- <vue-star-rate :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRating"></vue-star-rate> -->
+                    <b-form-rating @change="myRating" v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border style="background-color: rgb(20, 21, 23);"></b-form-rating>
                   </div>
                   <div v-else-if="!this.$store.state.loginUser">
-                    <b-form-rating value="0" disabled></b-form-rating>
+                    <b-form-rating value="0" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border disabled></b-form-rating>
                   </div>
-                  <button v-if="value" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
 
                   <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h3 class="modal-title" id="exampleModalLabel">평점</h3>      
-                          <vue-star-rate :rateRange="0" :maxIcon="5" :iconHeight="22" :iconWidth="22" :hasCounter="false" iconColor="#603217" iconColorHover="#603217" iconShape="tablets" @ratingSet="myRatingUpdate"></vue-star-rate>
+                          <h3 class="modal-title" id="exampleModalLabel">평점</h3>
+                          <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border @change="myRatingUpdate"></b-form-rating>
                         </div>
                         <div class="modal-footer">
+                          <button class="btn btn-warning" @click="myRatingDelete">삭제</button>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="reload">닫기</button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <button v-if="value" @click="myRatingDelete">삭제</button>
                 </div>
               </div>
             </div>
@@ -81,18 +79,7 @@
           <div name="i-want-see">
             <div name="movie-like" class="col my-2">
               <span>
-                <i
-                  v-if="liked"
-                  class="fas fa-heart"
-                  style="color: red"
-                  @click="updateLikes"
-                ></i>
-                <i
-                  v-else
-                  class="far fa-heart"
-                  style="color: white"
-                  @click="updateLikes"
-                ></i>
+                <img :src="iconURL" alt="" style="width: 20px; height: 20px;" @click="updateLikes">
               </span>
                 찜콩 +
             </div> 
@@ -120,18 +107,18 @@
 <script>
 import YoutubeVideo from './YoutubeVideo.vue'
 import axios from 'axios'
-// vue 별점 기능 구현 라이브러리
-import vueStarRate from 'vue-js-star-rating'
 import swal from 'sweetalert'
 
-const API_KEY = 'AIzaSyCHmkc02QIBqLGdUPBCmQ_XHLk1CayQUzs'
-const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+// const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
+// const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+
+const Django_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'MovieDetail',
   components: {
     YoutubeVideo,
-    vueStarRate,
+    // vueStarRate,
   },
   data: function () {
     return {
@@ -161,7 +148,6 @@ export default {
       return config;
     },
     updateLikes: function () {
-      const Django_URL = 'http://127.0.0.1:8000'
       axios({
         method: 'post',
         url: `${Django_URL}/movies/${this.movie.id}/likes/`,
@@ -176,8 +162,10 @@ export default {
           console.log(err)
         })
     },
-    myRating: function (rating) {
-      this.rankData.user_rank = rating
+    myRating: function () {
+      // event.preventDefault()
+      this.rankData.user_rank = this.value
+      console.log(this.value)
       const Django_URL = 'http://127.0.0.1:8000'
       axios({
         method: 'post',
@@ -187,7 +175,7 @@ export default {
       })
         .then(res => {
           console.log(res)
-          this.rankData.user_rank = rating
+          this.rankData.user_rank = this.value
           this.getUserRank()
         })
         .catch(err => {
@@ -263,40 +251,41 @@ export default {
           const userRank = res.data.user_rank
           this.rankData.user_rank = userRank
           this.value = userRank
-          // this.$store.dispatch('userRank', userRank)
-        })
-        .catch(err => {
-          console.log(err)
-          // const userRank = 0
-          // this.rankData.user_rank = userRank
-          // this.$store.dispatch('userRank', userRank)
-        })
-    },
-    getYoutubeVideo: function () {
-      const params = {
-        key: API_KEY,
-        part: 'snippet',
-        q: this.movie.title + ' 공식 예고편',
-        type: 'video',
-      }
-
-      axios({
-        method: 'get',
-        url: API_URL,
-        params: params,
-      })
-        .then(res => {
-          console.log(res)
-          const youtubeVideos = res.data.items
-          this.youtubeVideo = youtubeVideos[0]
         })
         .catch(err => {
           console.log(err)
         })
-
     },
+    // getYoutubeVideo: function () {
+    //   const params = {
+    //     key: API_KEY,
+    //     part: 'snippet',
+    //     q: this.movie.title + ' 공식 예고편',
+    //     type: 'video',
+    //   }
+    //   axios({
+    //     method: 'get',
+    //     url: API_URL,
+    //     params: params,
+    //   })
+    //     .then(res => {
+    //       console.log(res)
+    //       const youtubeVideos = res.data.items
+    //       this.youtubeVideo = youtubeVideos[0]
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // },
   },
   computed: {
+    iconURL: function () {
+      if (this.liked) {
+        return `${Django_URL}/static/movies/bean_full.png`
+      } else {
+        return `${Django_URL}/static/movies/bean_empty.png`
+      }
+    },
     imageURL: function () {
       const movieImage = this.movie.poster_path
       return `https://image.tmdb.org/t/p/original/${movieImage}`
