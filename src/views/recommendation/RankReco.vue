@@ -14,7 +14,7 @@
         </div>
       </div>
       <div id="rank-btn" class="row offset-5 col-1">
-        <button @click="getMBTIMovies">다시 추천</button>
+        <button @click="rankReco">다시 추천</button>
       </div>
     </div>
 
