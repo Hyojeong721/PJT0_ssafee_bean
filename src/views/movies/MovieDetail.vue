@@ -19,10 +19,11 @@
           <div class="rank">
             <div name="tmdb" class="rank-frame row" >
               <div class="tmdb-rank-title col-6">
-                <span>평점</span>
+                <span>TMDB 평점</span>
               </div>
               <div class="rank col">
                 {{ movie.rank }}
+                <span style="font-size: 12px"> / 5</span>
               </div>
             </div>
             <div name="user" class="rank-frame row" >
@@ -79,7 +80,7 @@
           <div name="i-want-see">
             <div name="movie-like" class="col my-2">
               <span>
-                <img :src="iconURL" alt="" style="width: 20px; height: 20px;" @click="updateLikes">
+                <img :src="iconURL" alt="" style="width: 30px; height: 30px;" @click="updateLikes">
               </span>
                 찜콩 +
             </div> 
@@ -110,7 +111,8 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 // const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
-// const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
+const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 const Django_URL = 'http://127.0.0.1:8000'
 
@@ -256,27 +258,27 @@ export default {
           console.log(err)
         })
     },
-    // getYoutubeVideo: function () {
-    //   const params = {
-    //     key: API_KEY,
-    //     part: 'snippet',
-    //     q: this.movie.title + ' 공식 예고편',
-    //     type: 'video',
-    //   }
-    //   axios({
-    //     method: 'get',
-    //     url: API_URL,
-    //     params: params,
-    //   })
-    //     .then(res => {
-    //       console.log(res)
-    //       const youtubeVideos = res.data.items
-    //       this.youtubeVideo = youtubeVideos[0]
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // },
+    getYoutubeVideo: function () {
+      const params = {
+        key: API_KEY,
+        part: 'snippet',
+        q: this.movie.title + ' 공식 예고편',
+        type: 'video',
+      }
+      axios({
+        method: 'get',
+        url: API_URL,
+        params: params,
+      })
+        .then(res => {
+          console.log(res)
+          const youtubeVideos = res.data.items
+          this.youtubeVideo = youtubeVideos[0]
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   },
   computed: {
     iconURL: function () {
@@ -344,6 +346,7 @@ export default {
 }
 .rank-frame {
   margin-bottom: 5px;
+  height: 30px;
   font-size: 15px;
 }
 .rank-frame .tmdb-rank-title {

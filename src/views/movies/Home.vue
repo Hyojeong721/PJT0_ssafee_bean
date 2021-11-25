@@ -3,7 +3,7 @@
     <div>
         <h2 class="p-4">현재 상영작</h2>
     </div>
-    <carousel-3d v-if="movies" :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
+    <carousel-3d class="carousel" v-if="movies" :controls-visible="true" :width="400" :height="550" :border="0" :controls-width="50" :controls-height="60">
       <slide v-for="(slide, i) in slides" :index="i" :key="i">
         <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
           <router-link :to="`/movies/${movies[i].id}`">
@@ -59,6 +59,7 @@ export default {
       .then((res) => {
         const movies = res.data.results
         this.slides = movies.length
+        this.movies = movies
         this.$store.dispatch('nowMovies', movies)
       })
       .catch((err) => {
@@ -70,7 +71,9 @@ export default {
 </script>
 
 <style>
-#home {
-  background-color: black;
+.carousel {
+  height: 600px;
+  margin: 0px;
+  background-color: rgb(20, 21, 23);
 }
 </style>
