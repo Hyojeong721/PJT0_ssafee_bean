@@ -111,8 +111,8 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 // const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
-// const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
-// const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
+const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 
 const Django_URL = 'http://127.0.0.1:8000'
@@ -273,27 +273,27 @@ export default {
           console.log(err)
         })
     },
-    // getYoutubeVideo: function () {
-    //   const params = {
-    //     key: API_KEY,
-    //     part: 'snippet',
-    //     q: this.movie.title + ' 공식 예고편',
-    //     type: 'video',
-    //   }
-    //   axios({
-    //     method: 'get',
-    //     url: API_URL,
-    //     params: params,
-    //   })
-    //     .then(res => {
-    //       console.log(res)
-    //       const youtubeVideos = res.data.items
-    //       this.youtubeVideo = youtubeVideos[0]
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // },
+    getYoutubeVideo: function () {
+      const params = {
+        key: API_KEY,
+        part: 'snippet',
+        q: this.movie.title + ' 공식 예고편',
+        type: 'video',
+      }
+      axios({
+        method: 'get',
+        url: API_URL,
+        params: params,
+      })
+        .then(res => {
+          console.log(res)
+          const youtubeVideos = res.data.items
+          this.youtubeVideo = youtubeVideos[0]
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   },
   computed: {
     iconURL: function () {
