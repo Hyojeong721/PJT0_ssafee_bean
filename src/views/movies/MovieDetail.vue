@@ -21,23 +21,23 @@
               <div class="tmdb-rank-title col-6" style="height: 40px">
                 <span>TMDB 평점</span>
               </div>
-              <div class="rank col">
+              <div class="rank col" style="font-weight: bold;">
                 {{ movie.rank }}
-                <span style="font-size: 12px"> / 5</span>
+                <span style="font-size: 15px"> &nbsp; / &nbsp; 5 </span>
               </div>
             </div>
             <div name="user" class="rank-frame row" >
               <div class="tmdb-rank-title col-6" style="height: 40px">
-                <span>사용자 평점 </span>
+                <span>사용자 평점</span>
               </div>
               <div class="rank col">
                 <div name="movie-user-rank" >
                   <div v-if="value && this.$store.state.loginUser">
-                    <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border readonly style="background-color: rgb(20, 21, 23);"></b-form-rating>
-                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
+                    <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border readonly style="background-color: rgb(20, 21, 23); margin-top: 2px;"></b-form-rating>
+                    <button class="btn update-rank-btn" style="color: white;" data-bs-toggle="modal" data-bs-target='#rankModal'>수정</button>
                   </div>
                   <div v-else-if="!value && this.$store.state.loginUser">
-                    <b-form-rating @change="myRating" v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border style="background-color: rgb(20, 21, 23);"></b-form-rating>
+                    <b-form-rating @change="myRating" v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border style="background-color: rgb(20, 21, 23); margin-top: 2px;"></b-form-rating>
                   </div>
                   <div v-else-if="!this.$store.state.loginUser">
                     <b-form-rating value="0" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border disabled></b-form-rating>
@@ -45,10 +45,10 @@
 
                   <div class="modal fade" id="rankModal" tabindex="-1" aria-labelledby="rankModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h3 class="modal-title" id="exampleModalLabel">평점</h3>
-                          <b-form-rating v-model="value" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border @change="myRatingUpdate"></b-form-rating>
+                      <div class="modal-content" style="background-color: rgb(93, 94, 95);">
+                        <div class="modal-header" style="justify-content: center;">
+                          <h3 class="modal-title col-2" id="exampleModalLabel">평점</h3>
+                          <b-form-rating v-model="value" style="background-color: rgb(93, 94, 95)" color="#603217" icon-empty="slash-circle" icon-full="slash-circle-fill" inline no-border @change="myRatingUpdate"></b-form-rating>
                         </div>
                         <div class="modal-footer">
                           <button class="btn btn-warning" @click="myRatingDelete">삭제</button>
@@ -78,9 +78,9 @@
           </div> 
 
           <div name="i-want-see">
-            <div name="movie-like" class="col my-2">
+            <div name="movie-like" class="col my-3">
               <span>
-                <img :src="iconURL" alt="" style="width: 30px; height: 30px;" @click="updateLikes">
+                <img :src="iconURL" alt="" style="width: 35px; height: 35px;" @click="updateLikes">
               </span>
                 찜콩 +
             </div> 
@@ -90,7 +90,7 @@
             <div class="movie-story-title mb-2">
               줄거리
             </div>
-            <div>
+            <div class="word" style="weight: 250px">
               {{ movie.story }}
             </div>
 
@@ -111,8 +111,8 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 // const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
-// const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
-// const API_URL = 'https://www.googleapis.com/youtube/v3/search'
+const API_KEY ='AIzaSyA8a3hwIdb8EJ1fOv1MGV7qdyT8nPLiDzM'
+const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 
 const Django_URL = 'http://127.0.0.1:8000'
@@ -273,27 +273,27 @@ export default {
           console.log(err)
         })
     },
-    // getYoutubeVideo: function () {
-    //   const params = {
-    //     key: API_KEY,
-    //     part: 'snippet',
-    //     q: this.movie.title + ' 공식 예고편',
-    //     type: 'video',
-    //   }
-    //   axios({
-    //     method: 'get',
-    //     url: API_URL,
-    //     params: params,
-    //   })
-    //     .then(res => {
-    //       console.log(res)
-    //       const youtubeVideos = res.data.items
-    //       this.youtubeVideo = youtubeVideos[0]
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // },
+    getYoutubeVideo: function () {
+      const params = {
+        key: API_KEY,
+        part: 'snippet',
+        q: this.movie.title + ' 공식 예고편',
+        type: 'video',
+      }
+      axios({
+        method: 'get',
+        url: API_URL,
+        params: params,
+      })
+        .then(res => {
+          console.log(res)
+          const youtubeVideos = res.data.items
+          this.youtubeVideo = youtubeVideos[0]
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   },
   computed: {
     iconURL: function () {
@@ -361,7 +361,7 @@ export default {
 }
 .rank-frame {
   margin-bottom: 5px;
-  font-size: 15px;
+  font-size: 18px;
   align-content: center;
 }
 .rank-frame .tmdb-rank-title {
@@ -371,15 +371,23 @@ export default {
 .rank-frame .rank {
   border: 2px solid rgb(56, 56, 56);
 }
+.update-rank-btn {
+  background-color: #38383800;
+  color: white;
+}
 .movie-info {
-  font-size: 10px;
+  font-size: 15px;
 }
 .movie-story {
-  font-size: 12px;
+  font-size: 17px;
 }
 .movie-story-title {
-  font-size: 13px;
+  margin: 3px;
+  font-size: 15px;
   font-weight:700;
 }
-
+.word {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>

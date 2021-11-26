@@ -3,15 +3,14 @@
     <div>
       <h2 class="m-4">리뷰 게시판</h2>
     </div>
-    <div id="review-create-table" class="container">
-
-      <div class="row offset-2 col-6 m-3"> 
-        <div class="my-2">
+    <div id="review-create-table">
+      <div class="container row mx-auto review-table">
+        <div class="m-3">
           <label for="title" class="form-label m-3" ><h3>제목</h3></label>
           <input id="title" type="text" class="form-control" v-model="title"  placeholder="제목을 입력하세요">
         </div>
-        <div class="my-2">
-          <label for="content" class="form-label m-3"><h4>내용</h4></label>
+        <div class="m-3">
+          <label for="content" class="form-label m-3"><h3>내용</h3></label>
           <textarea 
           class="form-control" 
           id="content" 
@@ -100,10 +99,8 @@ export default {
 </script>
 
 <style>
-#review-create-table {
-  border: 2px solid white;
-}
-textarea.form-control {
-    min-height: calc(17.5em + 0.75rem + 2px);
+.review-table {
+  flex-direction: column;
+  align-items: center;  
 }
 </style>

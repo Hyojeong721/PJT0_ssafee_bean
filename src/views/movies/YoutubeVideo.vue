@@ -1,12 +1,11 @@
 <template>
   <div v-if="youtubeVideo">
-    <div class="video-container">
+    <div class="video-container" style="text-align:center; position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
       <iframe
       :src="videoURL" 
       frameborder="0"
-      class="p-3 video-iframe"
-      height="auto"
-      width="100%"
+      class="p-3 video-iframe col"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
       >
       </iframe>
     </div>

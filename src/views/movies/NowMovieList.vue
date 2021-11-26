@@ -1,11 +1,8 @@
 <template>
   <div class="carousel-item active">
     <img class="d-block w-100" style="object-fit: cover" :src="imageURL" alt="movieImage">
-
   </div>
     <!-- <router-link :to="`/movies/${movie.id}`" style="color: black; text-decoration: none;"> -->
-      
-   
     <!-- </router-link> -->
 </template>
 

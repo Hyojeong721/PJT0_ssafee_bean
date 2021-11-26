@@ -1,17 +1,15 @@
 <template>
   <div class="movies col" style="align-content: center;">
-    <div name="movie" >
-      <div id="poster" class="col-lg-2">
+    <div name="movie" class="continer row movie-poster-card">
+      <div id="poster" class="col-3" style="width: 100%; height: 400px; line-height: 100px; text-align: center">
         <router-link :to="`/movies/${movie.id}`">
-          <div class="poster"  style="width: 296px;">
-            <div class="image" :style="{ backgroundImage: 'url(' + imageURL + ')' }"></div>
-          </div>
+          <img :src="imageURL" style="height: 100%; max-height: 390px; vertical-align: middle" alt="포스터">
         </router-link>
       </div>
-      <div class="movie-title">
+      <div class="movie-title col" style="text-align: center;">
         <p>{{ movie.title }}</p>
       </div>
-    </div>
+    </div> 
   </div>  
 </template>
 
@@ -44,21 +42,14 @@ export default {
 
 <style>
 #poster {
-  border: 1px solid black;
-  margin-bottom: 20px;
-}
-#poster .image {
-  width: 100%;
-  height: 350px;
-  /* max-height: 100%; */
-  background-size: cover;
-  background-repeat: repeat;
-  background-position: center;
+  /* border: 1px solid black; */
+  margin-bottom: 15px;
 }
 #poster .movie-title {
   margin-top: 5px;
 }
-.movies {
-
+.movie-poster-card {
+  justify-content: center;
+  flex-direction: column;
 }
 </style>

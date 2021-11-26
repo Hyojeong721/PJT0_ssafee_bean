@@ -12,18 +12,18 @@
     </div>
 
     <div v-if="this.$store.state.loginUser" name="mbti-reco-movie-list">
-      <div id="mbti-list" class="m-5 mb-2 container mx-auto" >
+      <div id="mbti-list" class="m-3 mb-1 container mx-auto" >
         <div id="mbti-movie" class="movie-list row">
           <movie-item v-for="movie in movies" :key="movie.id" :movie="movie"></movie-item>
         </div>
       </div>
-      <div id="mbti-btn" class="row offset-4 col-4">
-        <button @click="getMBTIMovies">다시 추천</button>
+      <div id="mbti-btn" class="row justify-content-center">
+        <button class=" col-2" @click="getMBTIMovies">다시 추천</button>
       </div>
     </div>
     <div v-else class="m-5 container">
       <h3 class="center">MBTI 기준 추천을 받으려면 로그인을 하세요.</h3>
-      <router-link class="center" to="/login">로그인하러 가기</router-link>
+      <router-link class="center-login" to="/login">로그인 하러 가기</router-link>
     </div>
   </div>
 </template>
@@ -125,5 +125,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.center-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+  text-decoration: none;
 }
 </style>
