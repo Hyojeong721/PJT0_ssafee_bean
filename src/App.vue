@@ -60,14 +60,21 @@
         </div>
       </nav>
     </div>
+    
     <router-view :key="$route.fullPath" @login="isLogin=true"/>
+    <Footer />
   </div>
 
 </template>
 
 <script>
+import Footer from './views/common/Footer.vue'
+
 export default {
   name: 'App',
+  components: {
+    Footer
+  },
   data: function () {
     return {
       isLogin: false,
